@@ -6,7 +6,7 @@
            xsi:type="MailApp">
   
   <Id>b3f7a2c1-8d4e-4f6a-9c2b-1e5d8f3a7b9c</Id>
-  <Version>1.0.0.2</Version>
+  <Version>1.0.0.5</Version>
   <ProviderName>SOCAR HR Technology</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Qonaq Buraxılışı" />
