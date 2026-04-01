@@ -6,15 +6,15 @@
            xsi:type="MailApp">
   
   <Id>b3f7a2c1-8d4e-4f6a-9c2b-1e5d8f3a7b9c</Id>
-  <Version>1.0.0.0</Version>
+  <Version>1.0.0.2</Version>
   <ProviderName>SOCAR HR Technology</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Qonaq Buraxılışı" />
   <Description DefaultValue="Meeting yaradarkən Forma 1 buraxılış sifarişi hazırlayıb reception-a göndərir." />
   
-  <IconUrl DefaultValue="https://socaraz-my.sharepoint.com/personal/afraim_mammadov_socar_az/Documents/Pictures/Add_Ins/icon-64.png"/>
-  <HighResolutionIconUrl DefaultValue="https://socaraz-my.sharepoint.com/personal/afraim_mammadov_socar_az/Documents/Pictures/Add_Ins/icon-128.png"/>
-  <SupportUrl DefaultValue="https://socaraz-my.sharepoint.com/personal/afraim_mammadov_socar_az/Documents/Pictures/Add_Ins/taskpane.html"/>
+  <IconUrl DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-128.png"/>
+  <SupportUrl DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/taskpane.html"/>
   
   <Hosts>
     <Host Name="Mailbox" />
@@ -29,7 +29,7 @@
   <FormSettings>
     <Form xsi:type="ItemEdit">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://socaraz-my.sharepoint.com/personal/afraim_mammadov_socar_az/Documents/Pictures/Add_Ins/taskpane.html"/>
+        <SourceLocation DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/taskpane.html"/>
       </DesktopSettings>
     </Form>
   </FormSettings>
@@ -41,13 +41,11 @@
   
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
     <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
-      
       <Requirements>
         <bt:Sets DefaultMinVersion="1.3">
           <bt:Set Name="Mailbox" />
         </bt:Sets>
       </Requirements>
-      
       <Hosts>
         <Host xsi:type="MailHost">
           <DesktopFormFactor>
@@ -76,15 +74,14 @@
           </DesktopFormFactor>
         </Host>
       </Hosts>
-      
       <Resources>
         <bt:Images>
-          <bt:Image id="icon16" DefaultValue="https://socaraz-my.sharepoint.com/personal/afraim_mammadov_socar_az/Documents/Pictures/Add_Ins/icon-16.png"/>
-          <bt:Image id="icon32" DefaultValue="https://socaraz-my.sharepoint.com/personal/afraim_mammadov_socar_az/Documents/Pictures/Add_Ins/icon-32.png"/>
-          <bt:Image id="icon80" DefaultValue="https://socaraz-my.sharepoint.com/personal/afraim_mammadov_socar_az/Documents/Pictures/Add_Ins/icon-80.png"/>
+          <bt:Image id="icon16" DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-16.png"/>
+          <bt:Image id="icon32" DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-64.png"/>
+          <bt:Image id="icon80" DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-80.png"/>
         </bt:Images>
         <bt:Urls>
-          <bt:Url id="taskpaneUrl" DefaultValue="https://socaraz-my.sharepoint.com/personal/afraim_mammadov_socar_az/Documents/Pictures/Add_Ins/taskpane.html"/>
+          <bt:Url id="taskpaneUrl" DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/taskpane.html"/>
         </bt:Urls>
         <bt:ShortStrings>
           <bt:String id="groupLabel" DefaultValue="Buraxılış" />
