@@ -1,0 +1,94 @@
+# Qonaq Buraxılışı — Outlook Add-in
+
+SOCAR Tower-ə qonaq buraxılışı üçün Forma 1 sifarişi yaradan Outlook Add-in.
+
+## Necə işləyir
+
+1. Outlook-da meeting yaradırsınız, attendee-ləri əlavə edirsiniz
+2. Ribbon-da "Buraxılış Forması" düyməsinə basırsınız
+3. Add-in meeting-dən attendee-ləri çəkir
+4. Hər attendee üçün müəssisəni seçirsiniz (email-dən avtomatik təxmin edir)
+5. "Göndər" basanda Forma 1 Word faylı generate olur və reception-a email göndərilir
+
+## Fayllar
+
+```
+manifest.xml    — Outlook Add-in manifest (sideload üçün)
+taskpane.html   — Əsas UI + Forma 1 generator (hər şey bir fayldadır)
+```
+
+## Quraşdırma (Sideloading)
+
+### Tələblər
+- Outlook Desktop (Windows)
+- "Get Add-ins" bölməsinə giriş icazəsi
+- HTTPS serveri (test üçün localhost, daimi üçün SharePoint)
+
+### Addım 1: Faylları host et
+
+**Test üçün (localhost):**
+
+Node.js quraşdırılıbsa:
+```powershell
+npx office-addin-dev-certs install
+npx http-server . -S -C localhost.pem -K localhost-key.pem -p 3000
+```
+
+Və ya Python ilə (əlavə sertifikat lazımdır):
+```powershell
+python -m http.server 3000
+```
+
+**Daimi istifadə üçün (SharePoint):**
+1. `taskpane.html` faylını SharePoint-ə yükləyin
+2. `manifest.xml`-dəki bütün `https://localhost:3000` ünvanlarını SharePoint URL-i ilə dəyişin
+
+### Addım 2: Add-in-i yüklə
+
+1. Outlook Desktop açın
+2. **Home** → **Get Add-ins** (və ya **Store**) basın
+3. Sol menyudan **My Add-ins** seçin
+4. Aşağıda **Custom Add-ins** bölməsini tapın
+5. **"Add a custom add-in"** → **"Add from File..."**
+6. `manifest.xml` faylını seçin
+
+### Addım 3: İstifadə et
+
+1. Yeni meeting yaradın (New Meeting)
+2. Attendee-ləri əlavə edin (Required/Optional)
+3. Ribbon-da **"Buraxılış Forması"** düyməsini basın
+4. Açılan paneldə addımları izləyin
+
+## Konfiqurasiya
+
+### URL-ləri dəyişmək
+`manifest.xml`-də aşağıdakı yerləri öz server ünvanınızla dəyişin:
+- `<SourceLocation>` — taskpane.html-in ünvanı
+- `<IconUrl>` — icon fayllarının ünvanı
+- Bütün `<bt:Image>` və `<bt:Url>` elementləri
+
+### Reception email
+Default olaraq `socar.reception@socar.az` təyin olunub.
+Dəyişmək üçün `taskpane.html`-də `fRecipient` input-un `value` atributunu yeniləyin.
+
+### Müəssisə siyahısı
+`taskpane.html`-dəki `SUBSIDIARIES` massivini redaktə edə bilərsiniz.
+
+### Email domenindən müəssisə təxmini
+`guessCompany()` funksiyasında yeni domen-müəssisə uyğunluqları əlavə edə bilərsiniz.
+
+## Texniki qeydlər
+
+- **docx kitabxanası** CDN-dən yüklənir (browser-side generation)
+- **FileSaver.js** faylın yüklənməsi üçün istifadə olunur
+- **Office.js** meeting məlumatlarını və attendee-ləri oxuyur
+- Word faylı A4 formatında, Times New Roman şriftində yaranır
+- Email həm HTML body, həm də Word attachment ilə göndərilir
+
+## Məhdudiyyətlər
+
+- Office.js API attendee-lərin department/company məlumatını vermir
+  (yalnız ad və email). Müəssisə email domenindən təxmin edilir.
+- Outlook desktop tələb edir (OWA-da da işləyə bilər, amma test olunmayıb)
+- displayNewMessageFormAsync ile attachment göndərilməsi bəzi Outlook versiyalarında
+  dəstəklənməyə bilər — bu halda fayl yerli olaraq yüklənir və mailto açılır.
