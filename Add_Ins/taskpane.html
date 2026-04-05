@@ -97,13 +97,13 @@
   <div class="hdr">
     <div class="hdr-icon">&#x1F3E2;</div>
     <div>
-      <h1>Qonaq Buraxilisi</h1>
+      <h1>Qonaq Buraxılışı</h1>
       <p>Forma 1 — SOCAR Tower</p>
     </div>
   </div>
 
   <div class="mbar">
-    <div><span class="lbl">Gorus</span><b id="mSubject">—</b></div>
+    <div><span class="lbl">Görüş</span><b id="mSubject">—</b></div>
     <div><span class="lbl">Tarix</span><b id="mDate">—</b></div>
   </div>
 
@@ -112,17 +112,17 @@
     <!-- STEP 0: Prompt -->
     <div id="step0" class="center">
       <div class="icon">&#x1F4CB;</div>
-      <h2>Buraxilis formasi lazimdir?</h2>
-      <p id="step0desc">Attendee-ler ucun Forma 1 hazirlanacaq ve reception-a gonderilecek</p>
+      <h2>Buraxılış forması lazımdır?</h2>
+      <p id="step0desc">Attendee-lər üçün Forma 1 hazırlanacaq və reception-a göndəriləcək</p>
       <div style="display:flex;gap:8px;justify-content:center;">
-        <button class="btn btn-p" onclick="startProcess()">Beli, hazirla</button>
+        <button class="btn btn-p" onclick="startProcess()">Bəli, hazırla</button>
         <button class="btn btn-g" onclick="window.close()">Xeyr</button>
       </div>
     </div>
 
     <!-- STEP 1: Select attendees -->
     <div id="step1" class="hidden">
-      <div class="stitle" id="attTitle">Attendee-leri sec</div>
+      <div class="stitle" id="attTitle">Attendee-ləri seç</div>
       <div id="attList"></div>
       <div class="btn-row">
         <button class="btn btn-p btn-full" id="btnToStep2" onclick="goStep2()">Davam et</button>
@@ -131,43 +131,43 @@
 
     <!-- STEP 2: Fill details -->
     <div id="step2" class="hidden">
-      <div class="stitle">Qonaq detallari</div>
+      <div class="stitle">Qonaq detalları</div>
       <div id="guestDetails"></div>
 
       <div class="meta-card">
-        <div class="stitle">Forma melumatlari</div>
+        <div class="stitle">Forma məlumatları</div>
         <div style="display:flex;gap:7px;margin-bottom:5px;">
-          <div class="fg"><label>Devetin meqsedi</label><input id="fPurpose" value="Layihe ile elaqedar" /></div>
+          <div class="fg"><label>Dəvətin məqsədi</label><input id="fPurpose" value="Layihə ilə əlaqədar" /></div>
         </div>
         <div style="display:flex;gap:7px;margin-bottom:5px;">
-          <div class="fg"><label>Devet olundugu yer</label><input id="fLocation" value="SOCAR Tower /25-ci mertebe" /></div>
-          <div class="fg"><label>Muddet</label><input id="fPeriod" value="" /></div>
+          <div class="fg"><label>Dəvət olunduğu yer</label><input id="fLocation" value="SOCAR Tower /25-ci mərtəbə" /></div>
+          <div class="fg"><label>Müddət</label><input id="fPeriod" value="" /></div>
         </div>
         <div style="display:flex;gap:7px;margin-bottom:5px;">
-          <div class="fg"><label>Bolme / Departament</label><input id="fDept" value="" /></div>
-          <div class="fg"><label>Elaqeli sexs</label><input id="fContact" value="" /></div>
+          <div class="fg"><label>Bölmə / Departament</label><input id="fDept" value="" /></div>
+          <div class="fg"><label>Əlaqəli şəxs</label><input id="fContact" value="" /></div>
         </div>
         <div style="display:flex;gap:7px;margin-bottom:5px;">
-          <div class="fg"><label>Daxili nomre</label><input id="fExt" value="" /></div>
+          <div class="fg"><label>Daxili nömrə</label><input id="fExt" value="" /></div>
         </div>
         <div style="display:flex;gap:7px;">
-          <div class="fg"><label>Tesdiq eden (ad)</label><input id="fApprName" value="" /></div>
-          <div class="fg"><label>Vezife</label><input id="fApprTitle" value="" /></div>
+          <div class="fg"><label>Təsdiq edən (ad)</label><input id="fApprName" value="" /></div>
+          <div class="fg"><label>Vəzifə</label><input id="fApprTitle" value="" /></div>
         </div>
       </div>
 
       <div class="btn-row">
-        <button class="btn btn-g" onclick="goStep1()">Geri</button>
-        <button class="btn btn-p btn-full" onclick="goStep3()">Onizleme</button>
+        <button class="btn btn-g" onclick="goStep1()">&#8592; Geri</button>
+        <button class="btn btn-p btn-full" onclick="goStep3()">Önizləmə &#8594;</button>
       </div>
     </div>
 
     <!-- STEP 3: Preview & Send -->
     <div id="step3" class="hidden">
-      <div class="stitle">Onizleme</div>
+      <div class="stitle">Önizləmə</div>
       <div class="preview-box" id="previewForma"></div>
       <div class="email-box">
-        <div style="font-size:10px;color:var(--txt2);font-weight:600;margin-bottom:4px;">EMAIL GONDERILECEK:</div>
+        <div style="font-size:10px;color:var(--txt2);font-weight:600;margin-bottom:4px;">EMAIL GÖNDƏRİLƏCƏK:</div>
         <div id="emailMeta"></div>
         <div class="email-body" id="emailBody"></div>
       </div>
@@ -176,8 +176,8 @@
         <input id="fRecipient" value="socar.reception@socar.az" />
       </div>
       <div class="btn-row">
-        <button class="btn btn-g" onclick="goStep2From3()">Duzelis</button>
-        <button class="btn btn-p btn-full" id="btnSend" onclick="sendAll()">Gonder + Forma 1</button>
+        <button class="btn btn-g" onclick="goStep2From3()">&#8592; Düzəliş</button>
+        <button class="btn btn-p btn-full" id="btnSend" onclick="sendAll()">&#x1F4E7; Göndər + Forma 1</button>
       </div>
       <div id="statusBar" class="status hidden"></div>
     </div>
@@ -185,9 +185,9 @@
     <!-- STEP 4: Done -->
     <div id="step4" class="hidden center">
       <div class="icon">&#x2705;</div>
-      <h2 style="color:var(--ok);">Gonderildi!</h2>
+      <h2 style="color:var(--ok);">Göndərildi!</h2>
       <p id="doneMsg"></p>
-      <button class="btn btn-g" onclick="resetAll()">Yeni sifaris</button>
+      <button class="btn btn-g" onclick="resetAll()">Yeni sifariş</button>
     </div>
   </div>
 
@@ -197,10 +197,10 @@ var selectedIds = new Set();
 var meetingData = { subject: '', dateTime: '', organizer: '', department: '', ext: '' };
 
 var SUBSIDIARIES = [
-  "SOCAR-in Bas ofisi","Azneft","Azeriqaz","Azerikimya","SDM","CIC",
-  "NeftQazTikinti","SOCAR Upstream","SOCAR Midstream","Qaz Ixrac Idaresi",
-  "Kompleks Qazma","Neft Kemerleri","SOCAR Polymer","SOCAR Methanol",
-  "SOCAR Energy","PwC","Diger"
+  "SOCAR-\u0131n Ba\u015f ofisi","Azneft","Az\u0259riqaz","Az\u0259rikimya","SDM","CIC",
+  "NeftQazTikinti","SOCAR Upstream","SOCAR Midstream","Qaz \u0130xrac \u0130dar\u0259si",
+  "Kompleks Qazma","Neft K\u0259m\u0259rl\u0259ri","SOCAR Polymer","SOCAR Methanol",
+  "SOCAR Energy","PwC","Dig\u0259r"
 ];
 
 Office.onReady(function(info) {
@@ -226,7 +226,7 @@ function loadFromOutlook() {
 
   item.subject.getAsync(function(r) {
     if (r.status === Office.AsyncResultStatus.Succeeded) {
-      meetingData.subject = r.value || 'Meeting';
+      meetingData.subject = r.value || 'G\u00f6r\u00fc\u015f';
       updateMeetingBar();
     }
   });
@@ -273,7 +273,7 @@ function loadFromOutlook() {
         }
         attendees = required.concat(optional);
         document.getElementById('step0desc').innerHTML =
-          attendees.length + ' attendee ucun Forma 1 hazirlanacaq<br>ve reception-a gonderilecek';
+          attendees.length + ' attendee \u00fc\u00e7\u00fcn Forma 1 haz\u0131rlanacaq<br>v\u0259 reception-a g\u00f6nd\u0259ril\u0259c\u0259k';
       });
     }
   });
@@ -284,17 +284,17 @@ function guessCompany(email) {
   email = email.toLowerCase();
   if (email.indexOf('pwc') >= 0) return 'PwC';
   if (email.indexOf('cic.socar') >= 0 || email.indexOf('@cic.') >= 0) return 'CIC';
-  if (email.indexOf('azeriqaz') >= 0) return 'Azeriqaz';
-  if (email.indexOf('gei.socar') >= 0) return 'Qaz Ixrac Idaresi';
+  if (email.indexOf('azeriqaz') >= 0) return 'Az\u0259riqaz';
+  if (email.indexOf('gei.socar') >= 0) return 'Qaz \u0130xrac \u0130dar\u0259si';
   if (email.indexOf('azneft') >= 0) return 'Azneft';
   if (email.indexOf('sdm') >= 0) return 'SDM';
   if (email.indexOf('upstream') >= 0) return 'SOCAR Upstream';
   if (email.indexOf('midstream') >= 0) return 'SOCAR Midstream';
-  if (email.indexOf('azerikimya') >= 0) return 'Azerikimya';
+  if (email.indexOf('azerikimya') >= 0) return 'Az\u0259rikimya';
   if (email.indexOf('neftqaz') >= 0) return 'NeftQazTikinti';
   if (email.indexOf('polymer') >= 0) return 'SOCAR Polymer';
   if (email.indexOf('downstream') >= 0) return 'SOCAR Downstream';
-  if (email.indexOf('socar.az') >= 0) return 'SOCAR-in Bas ofisi';
+  if (email.indexOf('socar.az') >= 0) return 'SOCAR-\u0131n Ba\u015f ofisi';
   return '';
 }
 
@@ -352,7 +352,7 @@ function renderAttendeeList() {
     if (a.type === 'manual') {
       html += '<div class="gcard" style="margin-bottom:6px;">' +
         '<div style="display:flex;gap:7px;">' +
-        '<div class="fg"><label>Ad Soyad</label><input value="' + esc(a.name) + '" placeholder="Qonagin adi soyadi" onchange="attendees[' + a.id + '].name=this.value" /></div>' +
+        '<div class="fg"><label>Ad Soyad</label><input value="' + esc(a.name) + '" placeholder="Qona\u011f\u0131n ad\u0131 soyad\u0131" onchange="attendees[' + a.id + '].name=this.value" /></div>' +
         '<div class="fg"><label>Email</label><input value="' + esc(a.email) + '" placeholder="email@company.com" onchange="attendees[' + a.id + '].email=this.value;attendees[' + a.id + '].company=guessCompany(this.value)" /></div>' +
         '</div>' +
         (a.id > 0 ? '<button class="btn btn-g" style="font-size:10px;padding:3px 8px;margin-top:4px;" onclick="removeManual(' + a.id + ')">Sil</button>' : '') +
@@ -369,12 +369,12 @@ function renderAttendeeList() {
     }
   });
 
-  html += '<button class="btn btn-g" style="width:100%;margin-top:8px;font-size:12px;" onclick="addManualGuest()">+ El ile qonaq elave et</button>';
+  html += '<button class="btn btn-g" style="width:100%;margin-top:8px;font-size:12px;" onclick="addManualGuest()">+ \u018fl il\u0259 qonaq \u0259lav\u0259 et</button>';
   list.innerHTML = html;
 
   var cnt = selectedIds.size;
-  document.getElementById('attTitle').textContent = 'Attendee-leri sec (' + cnt + ')';
-  document.getElementById('btnToStep2').textContent = 'Davam et (' + cnt + ' nefer)';
+  document.getElementById('attTitle').textContent = 'Attendee-l\u0259ri se\u00e7 (' + cnt + ')';
+  document.getElementById('btnToStep2').textContent = 'Davam et (' + cnt + ' n\u0259f\u0259r)';
 }
 
 function toggleAtt(id) {
@@ -409,10 +409,10 @@ function renderGuestDetails() {
       '<div class="gcard-num">' + (i+1) + '</div>' +
       '<div class="gcard-name">' + (esc(g.name) || '(ad daxil edin)') + '</div>' +
       '<div style="display:flex;gap:7px;">' +
-      '<div class="fg" style="flex:2"><label>Muessise / Sirket</label>' +
+      '<div class="fg" style="flex:2"><label>M\u00fc\u0259ssis\u0259 / \u015eirk\u0259t</label>' +
       '<select onchange="updateGuestField(' + g.id + ',\'company\',this.value)">' +
-      '<option value="">Secin...</option>' + opts + '</select></div>' +
-      '<div class="fg" style="flex:1"><label>Neqliyyat (varsa)</label>' +
+      '<option value="">Se\u00e7in...</option>' + opts + '</select></div>' +
+      '<div class="fg" style="flex:1"><label>N\u0259qliyyat (varsa)</label>' +
       '<input value="' + esc(g.vehicle) + '" placeholder="99-XX-000" onchange="updateGuestField(' + g.id + ',\'vehicle\',this.value)" /></div>' +
       '</div></div>';
   });
@@ -434,18 +434,18 @@ function renderPreview() {
   var meta = getFormMeta();
 
   var fHtml = '<div style="text-align:center;margin-bottom:8px;">' +
-    '<div style="font-weight:700;font-size:12px;">"SOCAR Tower"-e buraxilis ucun</div>' +
-    '<div style="font-weight:700;letter-spacing:3px;">S I F A R I S</div></div>' +
+    '<div style="font-weight:700;font-size:12px;">"SOCAR Tower"-\u0259 burax\u0131l\u0131\u015f \u00fc\u00e7\u00fcn</div>' +
+    '<div style="font-weight:700;letter-spacing:3px;">S \u0130 F A R \u0130 \u015e</div></div>' +
     '<table><tbody>' +
-    '<tr class="info-row"><td>Bolme</td><td>' + esc(meta.department) + '</td></tr>' +
-    '<tr class="info-row"><td>Meqsed</td><td>' + esc(meta.purpose) + '</td></tr>' +
+    '<tr class="info-row"><td>B\u00f6lm\u0259</td><td>' + esc(meta.department) + '</td></tr>' +
+    '<tr class="info-row"><td>M\u0259qs\u0259d</td><td>' + esc(meta.purpose) + '</td></tr>' +
     '<tr class="info-row"><td>Yer</td><td>' + esc(meta.location) + '</td></tr>' +
-    '<tr class="info-row"><td>Muddet</td><td>' + esc(meta.period) + '</td></tr>' +
+    '<tr class="info-row"><td>M\u00fcdd\u0259t</td><td>' + esc(meta.period) + '</td></tr>' +
     '</tbody></table>' +
-    '<table style="margin-top:8px;"><thead><tr><th>No</th><th>Ad Soyad</th><th>Muessise</th><th>Neqliyyat</th></tr></thead><tbody>';
+    '<table style="margin-top:8px;"><thead><tr><th>\u2116</th><th>Ad Soyad</th><th>M\u00fc\u0259ssis\u0259</th><th>N\u0259qliyyat</th></tr></thead><tbody>';
 
   guests.forEach(function(g, i) {
-    fHtml += '<tr><td>' + (i+1) + '</td><td>' + esc(g.name) + '</td><td>' + esc(g.company) + '</td><td>' + (esc(g.vehicle) || '—') + '</td></tr>';
+    fHtml += '<tr><td>' + (i+1) + '</td><td>' + esc(g.name) + '</td><td>' + esc(g.company) + '</td><td>' + (esc(g.vehicle) || '\u2014') + '</td></tr>';
   });
   fHtml += '</tbody></table>';
   document.getElementById('previewForma').innerHTML = fHtml;
@@ -453,8 +453,8 @@ function renderPreview() {
   var recipient = document.getElementById('fRecipient').value;
   document.getElementById('emailMeta').innerHTML =
     '<b>To:</b> ' + esc(recipient) + '<br>' +
-    '<b>Subject:</b> Buraxilis sifarisi — ' + esc(meetingData.subject) + ' (' + esc(meta.period) + ')<br>' +
-    '<b>Attach:</b> forma1_buraxilis.docx';
+    '<b>Subject:</b> Burax\u0131l\u0131\u015f sifari\u015fi \u2014 ' + esc(meetingData.subject) + ' (' + esc(meta.period) + ')<br>' +
+    '<b>Attach:</b> \uD83D\uDCCE forma1_buraxilis.docx';
   document.getElementById('emailBody').textContent = buildEmailText(guests, meta);
 }
 
@@ -472,14 +472,14 @@ function getFormMeta() {
 }
 
 function buildEmailText(guests, meta) {
-  return 'Hormetli hemkarlar,\n\nQosmadaki hemkarlarin Bas Ofise buraxilisi ile bagli desteyinizi xahis edirik.\n\nHormetle,\n' + meta.contact;
+  return 'H\u00f6rm\u0259tli h\u0259mkarlar,\n\nQo\u015fmadak\u0131 h\u0259mkarlar\u0131n Ba\u015f Ofis\u0259 burax\u0131l\u0131\u015f\u0131 il\u0259 ba\u011fl\u0131 d\u0259st\u0259yinizi xahi\u015f edirik.\n\nH\u00f6rm\u0259tl\u0259,\n' + meta.contact;
 }
 
 function buildEmailHtml(guests, meta) {
   return '<div style="font-family:Segoe UI,sans-serif;font-size:13px;color:#323130;">' +
-    '<p>Hormetli hemkarlar,</p>' +
-    '<p>Qosmadaki hemkarlarin Bas Ofise buraxilisi ile bagli desteyinizi xahis edirik.</p>' +
-    '<p>Hormetle,<br/><strong>' + esc(meta.contact) + '</strong></p></div>';
+    '<p>H\u00f6rm\u0259tli h\u0259mkarlar,</p>' +
+    '<p>Qo\u015fmadak\u0131 h\u0259mkarlar\u0131n Ba\u015f Ofis\u0259 burax\u0131l\u0131\u015f\u0131 il\u0259 ba\u011fl\u0131 d\u0259st\u0259yinizi xahi\u015f edirik.</p>' +
+    '<p>H\u00f6rm\u0259tl\u0259,<br/><strong>' + esc(meta.contact) + '</strong></p></div>';
 }
 
 async function generateForma1Docx(guests, meta) {
@@ -539,17 +539,17 @@ async function generateForma1Docx(guests, meta) {
       },
       children: [
         new D.Paragraph({alignment:D.AlignmentType.LEFT, spacing:{after:100}, children:[new D.TextRun({text:'Forma 1',italics:true,size:20,font:'Times New Roman'})]}),
-        new D.Paragraph({alignment:D.AlignmentType.CENTER, spacing:{before:100,after:40}, children:[new D.TextRun({text:'"SOCAR Tower"-e buraxilis ucun',bold:true,size:24,font:'Times New Roman'})]}),
-        new D.Paragraph({alignment:D.AlignmentType.CENTER, spacing:{after:100}, children:[new D.TextRun({text:'S I F A R I S',bold:true,size:24,font:'Times New Roman'})]}),
+        new D.Paragraph({alignment:D.AlignmentType.CENTER, spacing:{before:100,after:40}, children:[new D.TextRun({text:'"SOCAR Tower"-\u0259 burax\u0131l\u0131\u015f \u00fc\u00e7\u00fcn',bold:true,size:24,font:'Times New Roman'})]}),
+        new D.Paragraph({alignment:D.AlignmentType.CENTER, spacing:{after:100}, children:[new D.TextRun({text:'S \u0130 F A R \u0130 \u015e',bold:true,size:24,font:'Times New Roman'})]}),
         new D.Paragraph({alignment:D.AlignmentType.RIGHT, spacing:{after:200}, children:[new D.TextRun({text:dateStr,italics:true,size:22,font:'Times New Roman'})]}),
 
         new D.Table({
           width:{size:cw,type:D.WidthType.DXA}, columnWidths:[ilw,ivw],
           rows: [
-            infoRow('Sifarisi veren teskilat, muessise, struktur bolme:', meta.department + ', elaqeli sexs: ' + meta.contact + ' (' + meta.ext + ')'),
-            infoRow('Devetin meqsedi:', meta.purpose),
-            infoRow('Devet olundugu yer:\n(mertebe)', meta.location),
-            infoRow('Devet olunma tarixi ve muddeti:\n(bir is heftesindan artiq olmamaqla)', meta.period),
+            infoRow('Sifari\u015fi ver\u0259n t\u0259\u015fkilat, m\u00fc\u0259ssis\u0259, struktur b\u00f6lm\u0259:', meta.department + ', \u0259laq\u0259li \u015f\u0259xs: ' + meta.contact + ' (' + meta.ext + ')'),
+            infoRow('D\u0259v\u0259tin m\u0259qs\u0259di:', meta.purpose),
+            infoRow('D\u0259v\u0259t olundu\u011fu yer:\n(m\u0259rt\u0259b\u0259)', meta.location),
+            infoRow('D\u0259v\u0259t olunma tarixi v\u0259 m\u00fcdd\u0259ti:\n(bir i\u015f h\u0259ft\u0259sind\u0259n art\u0131q olmamaqla)', meta.period),
           ]
         }),
 
@@ -559,9 +559,9 @@ async function generateForma1Docx(guests, meta) {
           width:{size:cw,type:D.WidthType.DXA}, columnWidths:[cNo,cName,cComp,cVeh],
           rows: [
             new D.TableRow({children:[
-              hdrCell('Sira\nNo',cNo), hdrCell('Soyadi, adi',cName),
-              hdrCell('Temsil etdiyi\nMuessise / Sirket / Olke',cComp),
-              hdrCell('Neqliyyat vasitesi\nMarkasi / dovlet nomre nisani',cVeh),
+              hdrCell('S\u0131ra\n\u2116',cNo), hdrCell('Soyad\u0131, ad\u0131',cName),
+              hdrCell('T\u0259msil etdiyi\nM\u00fc\u0259ssis\u0259 / \u015eirk\u0259t / \u00d6lk\u0259',cComp),
+              hdrCell('N\u0259qliyyat vasit\u0259si\nMarkas\u0131 / d\u00f6vl\u0259t n\u00f6mr\u0259 ni\u015fan\u0131',cVeh),
             ]}),
             new D.TableRow({children:[
               cell('1',cNo,true,D.AlignmentType.CENTER), cell('2',cName,true,D.AlignmentType.CENTER),
@@ -585,14 +585,14 @@ async function generateForma1Docx(guests, meta) {
           width:{size:cw,type:D.WidthType.DXA}, columnWidths:[2500,1500,3000,500,cw-2500-1500-3000-500],
           rows: [
             new D.TableRow({children:[
-              plainCell('Sifaris verdi:',2500,true), plainCell('',1500),
+              plainCell('Sifari\u015f verdi:',2500,true), plainCell('',1500),
               plainCell(meta.approverTitle,3000,false,true), plainCell('',500),
               plainCell(meta.approverName,cw-2500-1500-3000-500,false,true),
             ]}),
             new D.TableRow({children:[
               plainCell('',2500), plainCell('',1500),
-              plainCell('(vezifesi)',3000,false,true), plainCell('',500),
-              plainCell('(adi, soyadi)',cw-2500-1500-3000-500,false,true),
+              plainCell('(v\u0259zif\u0259si)',3000,false,true), plainCell('',500),
+              plainCell('(ad\u0131, soyad\u0131)',cw-2500-1500-3000-500,false,true),
             ]}),
           ]
         }),
@@ -600,10 +600,10 @@ async function generateForma1Docx(guests, meta) {
         new D.Paragraph({spacing:{before:300}, children:[]}),
         new D.Paragraph({spacing:{after:60}, children:[
           new D.TextRun({text:'Qeyd. ',bold:true,size:18,font:'Times New Roman'}),
-          new D.TextRun({text:'1.Sifaris tesdiq ucun buraxilisa icaze verme selahiyyetine malik olan vezifeli sexse, icra ucun ise "socar.reception" unvanina gonderilmelidir.',size:18,font:'Times New Roman'}),
+          new D.TextRun({text:'1.Sifari\u015f t\u0259sdiq \u00fc\u00e7\u00fcn burax\u0131l\u0131\u015fa icaz\u0259 verm\u0259 s\u0259lahiyy\u0259tin\u0259 malik olan v\u0259zif\u0259li \u015f\u0259xs\u0259, icra \u00fc\u00e7\u00fcn is\u0259 "socar.reception" \u00fcnvan\u0131na g\u00f6nd\u0259rilm\u0259lidir.',size:18,font:'Times New Roman'}),
         ]}),
         new D.Paragraph({children:[
-          new D.TextRun({text:'2. 4-cu sutun qonagin "SOCAR-Tower"-in erazisine avtomobille daxil olacagi teqdirde doldurulmalidir.',size:18,font:'Times New Roman'}),
+          new D.TextRun({text:'2. 4-c\u00fc s\u00fctun qona\u011f\u0131n "SOCAR-Tower"-in \u0259razisin\u0259 avtobmobill\u0259 daxil olaca\u011f\u0131 t\u0259qdird\u0259 doldurulmal\u0131d\u0131r.',size:18,font:'Times New Roman'}),
         ]}),
       ]
     }]
@@ -616,7 +616,7 @@ async function generateForma1Docx(guests, meta) {
 async function sendAll() {
   var btn = document.getElementById('btnSend');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Hazirlanir...';
+  btn.innerHTML = '<span class="spinner"></span>Haz\u0131rlan\u0131r...';
 
   try {
     var guests = getActiveGuests();
@@ -632,7 +632,7 @@ async function sendAll() {
       try {
         Office.context.mailbox.displayNewMessageFormAsync({
           toRecipients: [recipient],
-          subject: 'Buraxilis sifarisi - ' + meetingData.subject + ' (' + meta.period + ')',
+          subject: 'Burax\u0131l\u0131\u015f sifari\u015fi \u2014 ' + meetingData.subject + ' (' + meta.period + ')',
           htmlBody: buildEmailHtml(guests, meta),
           attachments: [{
             type: Office.MailboxEnums.AttachmentType.File,
@@ -655,21 +655,21 @@ async function sendAll() {
 
   } catch(err) {
     btn.disabled = false;
-    btn.innerHTML = 'Gonder + Forma 1';
-    showStatus('err', 'Xeta: ' + err.message);
+    btn.innerHTML = '\uD83D\uDCE7 G\u00f6nd\u0259r + Forma 1';
+    showStatus('err', 'X\u0259ta: ' + err.message);
   }
 }
 
 function fallbackSend(blob, recipient, meta) {
   saveAs(blob, 'forma1_buraxilis.docx');
-  var subject = encodeURIComponent('Buraxilis sifarisi - ' + meetingData.subject + ' (' + meta.period + ')');
-  var body = encodeURIComponent('Hormetli hemkarlar,\n\nQosmadaki hemkarlarin Bas Ofise buraxilisi ile bagli desteyinizi xahis edirik.\n\nHormetle,\n' + meta.contact);
+  var subject = encodeURIComponent('Burax\u0131l\u0131\u015f sifari\u015fi \u2014 ' + meetingData.subject + ' (' + meta.period + ')');
+  var body = encodeURIComponent('H\u00f6rm\u0259tli h\u0259mkarlar,\n\nQo\u015fmadak\u0131 h\u0259mkarlar\u0131n Ba\u015f Ofis\u0259 burax\u0131l\u0131\u015f\u0131 il\u0259 ba\u011fl\u0131 d\u0259st\u0259yinizi xahi\u015f edirik.\n\nH\u00f6rm\u0259tl\u0259,\n' + meta.contact);
   window.open('mailto:' + recipient + '?subject=' + subject + '&body=' + body);
 }
 
 function showDone(count, recipient) {
   document.getElementById('doneMsg').innerHTML =
-    'Forma 1 (' + count + ' nefer) Word formatinda<br><b>' + esc(recipient) + '</b> unvanina gonderildi.';
+    'Forma 1 (' + count + ' n\u0259f\u0259r) Word format\u0131nda<br><b>' + esc(recipient) + '</b> \u00fcnvan\u0131na g\u00f6nd\u0259rildi.';
   showStep(4);
 }
 
