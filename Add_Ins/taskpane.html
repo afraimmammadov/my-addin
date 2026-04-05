@@ -5,91 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Qonaq Buraxılışı — Forma 1</title>
   <script src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
   <style>
-    :root {
-      --dark: #1a1a2e;
-      --accent: #0078d4;
-      --accent-h: #106ebe;
-      --ok: #107c10;
-      --bg: #f4f5f7;
-      --card: #ffffff;
-      --bdr: #e1e4e8;
-      --txt: #24292e;
-      --txt2: #586069;
-      --err: #d13438;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Segoe UI',system-ui,sans-serif; font-size:13px; color:var(--txt); background:var(--bg); }
-
-    .hdr { background:var(--dark); color:#fff; padding:13px 16px; display:flex; align-items:center; gap:10px; }
-    .hdr-icon { width:28px; height:28px; background:var(--accent); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:14px; }
-    .hdr h1 { font-size:13.5px; font-weight:700; }
-    .hdr p { font-size:10.5px; opacity:.6; margin-top:1px; }
-
-    .mbar { background:var(--card); border-bottom:1px solid var(--bdr); padding:9px 16px; display:flex; gap:16px; font-size:11.5px; }
-    .mbar .lbl { font-size:9.5px; text-transform:uppercase; letter-spacing:.7px; color:var(--txt2); font-weight:700; }
-    .mbar b { display:block; margin-top:1px; }
-
-    .wrap { padding:14px 16px; }
-    .stitle { font-size:11.5px; font-weight:700; color:var(--dark); margin-bottom:10px; padding-bottom:5px; border-bottom:2px solid var(--accent); display:inline-block; }
-
-    .att-row { display:flex; align-items:center; gap:8px; padding:7px 10px; margin-bottom:3px; background:var(--card); border:1px solid var(--bdr); border-radius:6px; cursor:pointer; transition:all .15s; }
-    .att-row.sel { background:rgba(0,120,212,.05); border-color:rgba(0,120,212,.3); }
-    .att-row input[type=checkbox] { accent-color:var(--accent); width:15px; height:15px; }
-    .att-name { font-size:12.5px; font-weight:600; }
-    .att-email { font-size:10px; color:var(--txt2); }
-    .att-badge { display:inline-block; background:rgba(0,120,212,.1); color:var(--accent); font-size:9.5px; font-weight:700; padding:2px 7px; border-radius:10px; margin-left:auto; }
-
-    .gcard { background:var(--card); border:1px solid var(--bdr); border-radius:8px; padding:11px 11px 7px; margin-bottom:7px; position:relative; }
-    .gcard-num { position:absolute; top:-7px; left:10px; background:var(--accent); color:#fff; font-size:9.5px; font-weight:700; width:17px; height:17px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
-    .gcard-name { font-size:12px; font-weight:600; margin-bottom:7px; padding-left:18px; }
-
-    .fg { flex:1; display:flex; flex-direction:column; gap:2px; }
-    .fg label { font-size:10px; font-weight:600; color:var(--txt2); }
-    .fg input, .fg select, .fg textarea {
-      border:1px solid var(--bdr); border-radius:5px; padding:6px 8px; font-size:12px;
-      font-family:inherit; color:var(--txt); background:#fafbfc; outline:none; width:100%;
-    }
-    .fg input:focus, .fg select:focus, .fg textarea:focus {
-      border-color:var(--accent); box-shadow:0 0 0 2px rgba(0,120,212,.1); background:#fff;
-    }
-
-    .meta-card { margin-top:10px; background:var(--card); border:1px solid var(--bdr); border-radius:8px; padding:11px; }
-
-    .btn { padding:9px 16px; border-radius:6px; font-size:12.5px; font-weight:600; cursor:pointer; border:none; transition:all .15s; }
-    .btn-p { background:var(--accent); color:#fff; }
-    .btn-p:hover { background:var(--accent-h); }
-    .btn-p:disabled { background:#c8c6c4; cursor:not-allowed; }
-    .btn-g { background:transparent; border:1px solid var(--bdr); color:var(--txt); }
-    .btn-g:hover { background:#f0f2f5; }
-    .btn-full { flex:1; }
-    .btn-row { display:flex; gap:8px; margin-top:12px; }
-
-    .preview-box { background:#fff; border:1px solid var(--bdr); border-radius:6px; padding:12px; margin-bottom:9px; font-size:11px; line-height:1.6; }
-    .preview-box table { width:100%; border-collapse:collapse; font-size:10px; }
-    .preview-box th { padding:4px 6px; border-bottom:1px solid var(--bdr); text-align:left; font-weight:600; background:#f0f2f5; }
-    .preview-box td { padding:3px 6px; border-bottom:1px solid #f0f2f5; }
-    .preview-box .info-row td { padding:3px 8px; border-bottom:1px solid var(--bdr); }
-    .preview-box .info-row td:first-child { font-weight:600; color:var(--txt2); width:80px; }
-
-    .email-box { background:#fafbfc; border:1px solid var(--bdr); border-radius:6px; padding:11px; margin-bottom:9px; font-size:11px; }
-    .email-body { white-space:pre-wrap; background:#fff; padding:8px; border-radius:4px; border:1px solid var(--bdr); margin-top:6px; line-height:1.6; }
-
-    .center { text-align:center; padding:28px 10px; }
-    .center .icon { font-size:34px; margin-bottom:10px; }
-    .center h2 { font-size:14px; font-weight:600; margin-bottom:5px; }
-    .center p { font-size:12px; color:var(--txt2); line-height:1.5; margin-bottom:16px; }
-
-    .status { padding:9px 14px; border-radius:6px; font-size:12px; font-weight:500; text-align:center; margin-top:8px; }
-    .status.ok { background:#dff6dd; color:var(--ok); border:1px solid #a7e3a5; }
-    .status.err { background:#fde7e9; color:var(--err); border:1px solid #f1bbbc; }
-
-    .spinner { display:inline-block; width:14px; height:14px; border:2px solid rgba(255,255,255,.3); border-top-color:#fff; border-radius:50%; animation:spin .5s linear infinite; vertical-align:middle; margin-right:6px; }
-    @keyframes spin { to { transform:rotate(360deg); } }
-
-    .hidden { display:none !important; }
+    :root{--dark:#1a1a2e;--accent:#0078d4;--accent-h:#106ebe;--ok:#107c10;--bg:#f4f5f7;--card:#fff;--bdr:#e1e4e8;--txt:#24292e;--txt2:#586069;--err:#d13438}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;color:var(--txt);background:var(--bg)}
+    .hdr{background:var(--dark);color:#fff;padding:13px 16px;display:flex;align-items:center;gap:10px}
+    .hdr-icon{width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px}
+    .hdr h1{font-size:13.5px;font-weight:700}
+    .hdr p{font-size:10.5px;opacity:.6;margin-top:1px}
+    .mbar{background:var(--card);border-bottom:1px solid var(--bdr);padding:9px 16px;display:flex;gap:16px;font-size:11.5px}
+    .mbar .lbl{font-size:9.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--txt2);font-weight:700}
+    .mbar b{display:block;margin-top:1px}
+    .wrap{padding:14px 16px}
+    .stitle{font-size:11.5px;font-weight:700;color:var(--dark);margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid var(--accent);display:inline-block}
+    .att-row{display:flex;align-items:center;gap:8px;padding:7px 10px;margin-bottom:3px;background:var(--card);border:1px solid var(--bdr);border-radius:6px;cursor:pointer;transition:all .15s}
+    .att-row.sel{background:rgba(0,120,212,.05);border-color:rgba(0,120,212,.3)}
+    .att-row input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px}
+    .att-name{font-size:12.5px;font-weight:600}
+    .att-email{font-size:10px;color:var(--txt2)}
+    .att-badge{display:inline-block;background:rgba(0,120,212,.1);color:var(--accent);font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:auto}
+    .gcard{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:11px 11px 7px;margin-bottom:7px;position:relative}
+    .gcard-num{position:absolute;top:-7px;left:10px;background:var(--accent);color:#fff;font-size:9.5px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .gcard-name{font-size:12px;font-weight:600;margin-bottom:7px;padding-left:18px}
+    .fg{flex:1;display:flex;flex-direction:column;gap:2px}
+    .fg label{font-size:10px;font-weight:600;color:var(--txt2)}
+    .fg input,.fg select{border:1px solid var(--bdr);border-radius:5px;padding:6px 8px;font-size:12px;font-family:inherit;color:var(--txt);background:#fafbfc;outline:none;width:100%}
+    .fg input:focus,.fg select:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(0,120,212,.1);background:#fff}
+    .meta-card{margin-top:10px;background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:11px}
+    .btn{padding:9px 16px;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;border:none;transition:all .15s}
+    .btn-p{background:var(--accent);color:#fff}
+    .btn-p:hover{background:var(--accent-h)}
+    .btn-p:disabled{background:#c8c6c4;cursor:not-allowed}
+    .btn-g{background:transparent;border:1px solid var(--bdr);color:var(--txt)}
+    .btn-g:hover{background:#f0f2f5}
+    .btn-full{flex:1}
+    .btn-row{display:flex;gap:8px;margin-top:12px}
+    .preview-box{background:#fff;border:1px solid var(--bdr);border-radius:6px;padding:12px;margin-bottom:9px;font-size:11px;line-height:1.6}
+    .preview-box table{width:100%;border-collapse:collapse;font-size:10px}
+    .preview-box th{padding:4px 6px;border-bottom:1px solid var(--bdr);text-align:left;font-weight:600;background:#f0f2f5}
+    .preview-box td{padding:3px 6px;border-bottom:1px solid #f0f2f5}
+    .preview-box .info-row td{padding:3px 8px;border-bottom:1px solid var(--bdr)}
+    .preview-box .info-row td:first-child{font-weight:600;color:var(--txt2);width:80px}
+    .email-box{background:#fafbfc;border:1px solid var(--bdr);border-radius:6px;padding:11px;margin-bottom:9px;font-size:11px}
+    .email-body{white-space:pre-wrap;background:#fff;padding:8px;border-radius:4px;border:1px solid var(--bdr);margin-top:6px;line-height:1.6}
+    .center{text-align:center;padding:28px 10px}
+    .center .icon{font-size:34px;margin-bottom:10px}
+    .center h2{font-size:14px;font-weight:600;margin-bottom:5px}
+    .center p{font-size:12px;color:var(--txt2);line-height:1.5;margin-bottom:16px}
+    .status{padding:9px 14px;border-radius:6px;font-size:12px;font-weight:500;text-align:center;margin-top:8px}
+    .status.ok{background:#dff6dd;color:var(--ok);border:1px solid #a7e3a5}
+    .status.err{background:#fde7e9;color:var(--err);border:1px solid #f1bbbc}
+    .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .5s linear infinite;vertical-align:middle;margin-right:6px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .hidden{display:none !important}
   </style>
 </head>
 <body>
@@ -108,8 +76,6 @@
   </div>
 
   <div class="wrap">
-
-    <!-- STEP 0: Prompt -->
     <div id="step0" class="center">
       <div class="icon">&#x1F4CB;</div>
       <h2>Buraxılış forması lazımdır?</h2>
@@ -120,7 +86,6 @@
       </div>
     </div>
 
-    <!-- STEP 1: Select attendees -->
     <div id="step1" class="hidden">
       <div class="stitle" id="attTitle">Attendee-ləri seç</div>
       <div id="attList"></div>
@@ -129,11 +94,9 @@
       </div>
     </div>
 
-    <!-- STEP 2: Fill details -->
     <div id="step2" class="hidden">
       <div class="stitle">Qonaq detalları</div>
       <div id="guestDetails"></div>
-
       <div class="meta-card">
         <div class="stitle">Forma məlumatları</div>
         <div style="display:flex;gap:7px;margin-bottom:5px;">
@@ -155,14 +118,12 @@
           <div class="fg"><label>Vəzifə</label><input id="fApprTitle" value="" /></div>
         </div>
       </div>
-
       <div class="btn-row">
         <button class="btn btn-g" onclick="goStep1()">&#8592; Geri</button>
         <button class="btn btn-p btn-full" onclick="goStep3()">Önizləmə &#8594;</button>
       </div>
     </div>
 
-    <!-- STEP 3: Preview & Send -->
     <div id="step3" class="hidden">
       <div class="stitle">Önizləmə</div>
       <div class="preview-box" id="previewForma"></div>
@@ -182,7 +143,6 @@
       <div id="statusBar" class="status hidden"></div>
     </div>
 
-    <!-- STEP 4: Done -->
     <div id="step4" class="hidden center">
       <div class="icon">&#x2705;</div>
       <h2 style="color:var(--ok);">Göndərildi!</h2>
@@ -192,9 +152,277 @@
   </div>
 
 <script>
+// ══════════════════════════════════════════════════════════
+// INLINE MINI ZIP LIBRARY (no external dependency needed)
+// Creates a valid .docx (ZIP) file from raw XML parts
+// ══════════════════════════════════════════════════════════
+var MiniZip = (function() {
+  function crc32(data) {
+    var table = [];
+    for (var n = 0; n < 256; n++) {
+      var c = n;
+      for (var k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1;
+      table[n] = c;
+    }
+    var crc = 0xFFFFFFFF;
+    for (var i = 0; i < data.length; i++) crc = table[(crc ^ data[i]) & 0xFF] ^ (crc >>> 8);
+    return (crc ^ 0xFFFFFFFF) >>> 0;
+  }
+
+  function strToBytes(str) {
+    var encoder = new TextEncoder();
+    return encoder.encode(str);
+  }
+
+  function writeUint16LE(val) { return [val & 0xFF, (val >> 8) & 0xFF]; }
+  function writeUint32LE(val) { return [val & 0xFF, (val >> 8) & 0xFF, (val >> 16) & 0xFF, (val >> 24) & 0xFF]; }
+
+  function createZip(files) {
+    var localHeaders = [];
+    var centralHeaders = [];
+    var offset = 0;
+
+    files.forEach(function(file) {
+      var fnBytes = strToBytes(file.name);
+      var dataBytes = strToBytes(file.content);
+      var crc = crc32(dataBytes);
+      var size = dataBytes.length;
+
+      // Local file header
+      var local = [].concat(
+        [0x50, 0x4B, 0x03, 0x04], // signature
+        writeUint16LE(20),         // version needed
+        writeUint16LE(0),          // flags
+        writeUint16LE(0),          // compression (store)
+        writeUint16LE(0),          // mod time
+        writeUint16LE(0),          // mod date
+        writeUint32LE(crc),
+        writeUint32LE(size),       // compressed
+        writeUint32LE(size),       // uncompressed
+        writeUint16LE(fnBytes.length),
+        writeUint16LE(0)           // extra field length
+      );
+
+      var localEntry = new Uint8Array(local.length + fnBytes.length + size);
+      localEntry.set(local, 0);
+      localEntry.set(fnBytes, local.length);
+      localEntry.set(dataBytes, local.length + fnBytes.length);
+
+      // Central directory header
+      var central = [].concat(
+        [0x50, 0x4B, 0x01, 0x02],
+        writeUint16LE(20),         // version made by
+        writeUint16LE(20),         // version needed
+        writeUint16LE(0),          // flags
+        writeUint16LE(0),          // compression
+        writeUint16LE(0),          // mod time
+        writeUint16LE(0),          // mod date
+        writeUint32LE(crc),
+        writeUint32LE(size),
+        writeUint32LE(size),
+        writeUint16LE(fnBytes.length),
+        writeUint16LE(0),          // extra
+        writeUint16LE(0),          // comment
+        writeUint16LE(0),          // disk
+        writeUint16LE(0),          // internal attrs
+        writeUint32LE(0),          // external attrs
+        writeUint32LE(offset)      // local header offset
+      );
+
+      var centralEntry = new Uint8Array(central.length + fnBytes.length);
+      centralEntry.set(central, 0);
+      centralEntry.set(fnBytes, central.length);
+
+      localHeaders.push(localEntry);
+      centralHeaders.push(centralEntry);
+      offset += localEntry.length;
+    });
+
+    var centralOffset = offset;
+    var centralSize = 0;
+    centralHeaders.forEach(function(c) { centralSize += c.length; });
+
+    // End of central directory
+    var eocd = [].concat(
+      [0x50, 0x4B, 0x05, 0x06],
+      writeUint16LE(0),
+      writeUint16LE(0),
+      writeUint16LE(files.length),
+      writeUint16LE(files.length),
+      writeUint32LE(centralSize),
+      writeUint32LE(centralOffset),
+      writeUint16LE(0)
+    );
+
+    var totalSize = offset + centralSize + eocd.length;
+    var result = new Uint8Array(totalSize);
+    var pos = 0;
+    localHeaders.forEach(function(l) { result.set(l, pos); pos += l.length; });
+    centralHeaders.forEach(function(c) { result.set(c, pos); pos += c.length; });
+    result.set(eocd, pos);
+
+    return new Blob([result], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+  }
+
+  return { createZip: createZip };
+})();
+
+// ══════════════════════════════════════════════════════════
+// DOCX XML GENERATOR
+// ══════════════════════════════════════════════════════════
+function generateDocxBlob(guests, meta) {
+  var x = escXml;
+  var today = new Date();
+  var months = ['yanvar','fevral','mart','aprel','may','iyun','iyul','avqust','sentyabr','oktyabr','noyabr','dekabr'];
+  var dateStr = String(today.getDate()).padStart(2,'0') + ' ' + months[today.getMonth()] + ' ' + today.getFullYear();
+
+  function tcBold(text, w) {
+    return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/></w:tcPr>' +
+      text.split('\n').map(function(line) {
+        return '<w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:b/><w:sz w:val="20"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/></w:rPr><w:t xml:space="preserve">'+x(line)+'</w:t></w:r></w:p>';
+      }).join('') + '</w:tc>';
+  }
+
+  function tcItalic(text, w) {
+    return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/></w:tcPr>' +
+      '<w:p><w:r><w:rPr><w:i/><w:sz w:val="22"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/></w:rPr><w:t xml:space="preserve">'+x(text)+'</w:t></w:r></w:p></w:tc>';
+  }
+
+  function tcPlain(text, w, align) {
+    var jc = align ? '<w:jc w:val="'+align+'"/>' : '';
+    return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/></w:tcPr>' +
+      '<w:p><w:pPr>'+jc+'</w:pPr><w:r><w:rPr><w:i/><w:sz w:val="20"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/></w:rPr><w:t xml:space="preserve">'+x(text)+'</w:t></w:r></w:p></w:tc>';
+  }
+
+  function infoRowLabel(label, w) {
+    return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/></w:tcPr>' +
+      label.split('\n').map(function(line) {
+        return '<w:p><w:r><w:rPr><w:b/><w:sz w:val="22"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/></w:rPr><w:t xml:space="preserve">'+x(line)+'</w:t></w:r></w:p>';
+      }).join('') + '</w:tc>';
+  }
+
+  var cw = 9922; // content width
+  var ilw = 3200, ivw = cw - ilw;
+  var cNo = 600, cName = 3400, cComp = 3400, cVeh = cw - cNo - cName - cComp;
+
+  // Guest rows
+  var guestRows = '';
+  guests.forEach(function(g, i) {
+    guestRows += '<w:tr>' +
+      tcPlain(''+(i+1), cNo, 'center') +
+      tcPlain(g.name, cName) +
+      tcPlain(g.company, cComp) +
+      tcPlain(g.vehicle || '', cVeh) +
+      '</w:tr>';
+  });
+  // Empty row
+  guestRows += '<w:tr>' + tcPlain('',cNo,'center') + tcPlain('',cName) + tcPlain('',cComp) + tcPlain('',cVeh) + '</w:tr>';
+
+  var noBdr = '<w:tcBorders><w:top w:val="none" w:sz="0" w:space="0" w:color="auto"/><w:bottom w:val="none" w:sz="0" w:space="0" w:color="auto"/><w:left w:val="none" w:sz="0" w:space="0" w:color="auto"/><w:right w:val="none" w:sz="0" w:space="0" w:color="auto"/></w:tcBorders>';
+
+  function tcNoBdr(text, w, bold, italic) {
+    var rpr = '<w:rPr><w:sz w:val="20"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/>';
+    if (bold) rpr += '<w:b/>';
+    if (italic) rpr += '<w:i/>';
+    rpr += '</w:rPr>';
+    return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/>'+noBdr+'</w:tcPr>' +
+      '<w:p><w:r>'+rpr+'<w:t xml:space="preserve">'+x(text)+'</w:t></w:r></w:p></w:tc>';
+  }
+
+  var apprW5 = cw - 2500 - 1500 - 3000 - 500;
+
+  var documentXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:mo="http://schemas.microsoft.com/office/mac/office/2008/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mv="urn:schemas-microsoft-com:mac:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 wp14">' +
+    '<w:body>' +
+
+    // Forma 1
+    '<w:p><w:r><w:rPr><w:i/><w:sz w:val="20"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/></w:rPr><w:t>Forma 1</w:t></w:r></w:p>' +
+
+    // Title
+    '<w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:b/><w:sz w:val="24"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/></w:rPr><w:t>"SOCAR Tower"-\u0259 burax\u0131l\u0131\u015f \u00fc\u00e7\u00fcn</w:t></w:r></w:p>' +
+    '<w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:b/><w:sz w:val="24"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/></w:rPr><w:t>S \u0130 F A R \u0130 \u015e</w:t></w:r></w:p>' +
+
+    // Date
+    '<w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:i/><w:sz w:val="22"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/></w:rPr><w:t>'+x(dateStr)+'</w:t></w:r></w:p>' +
+
+    '<w:p/>' +
+
+    // Info table
+    '<w:tbl><w:tblPr><w:tblW w:w="'+cw+'" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:insideH w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:insideV w:val="single" w:sz="4" w:space="0" w:color="000000"/></w:tblBorders></w:tblPr>' +
+    '<w:tr>' + infoRowLabel('Sifari\u015fi ver\u0259n t\u0259\u015fkilat, m\u00fc\u0259ssis\u0259, struktur b\u00f6lm\u0259:', ilw) + tcItalic(meta.department + ', \u0259laq\u0259li \u015f\u0259xs: ' + meta.contact + ' (' + meta.ext + ')', ivw) + '</w:tr>' +
+    '<w:tr>' + infoRowLabel('D\u0259v\u0259tin m\u0259qs\u0259di:', ilw) + tcItalic(meta.purpose, ivw) + '</w:tr>' +
+    '<w:tr>' + infoRowLabel('D\u0259v\u0259t olundu\u011fu yer:\n(m\u0259rt\u0259b\u0259)', ilw) + tcItalic(meta.location, ivw) + '</w:tr>' +
+    '<w:tr>' + infoRowLabel('D\u0259v\u0259t olunma tarixi v\u0259 m\u00fcdd\u0259ti:\n(bir i\u015f h\u0259ft\u0259sind\u0259n art\u0131q olmamaqla)', ilw) + tcItalic(meta.period, ivw) + '</w:tr>' +
+    '</w:tbl>' +
+
+    '<w:p/>' +
+
+    // Guest table
+    '<w:tbl><w:tblPr><w:tblW w:w="'+cw+'" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:insideH w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:insideV w:val="single" w:sz="4" w:space="0" w:color="000000"/></w:tblBorders></w:tblPr>' +
+    // Header row
+    '<w:tr>' +
+      tcBold('S\u0131ra\n\u2116', cNo) +
+      tcBold('Soyad\u0131, ad\u0131', cName) +
+      tcBold('T\u0259msil etdiyi\nM\u00fc\u0259ssis\u0259 / \u015eirk\u0259t / \u00d6lk\u0259', cComp) +
+      tcBold('N\u0259qliyyat vasit\u0259si\nMarkas\u0131 / d\u00f6vl\u0259t n\u00f6mr\u0259 ni\u015fan\u0131', cVeh) +
+    '</w:tr>' +
+    // Number row
+    '<w:tr>' + tcBold('1',cNo) + tcBold('2',cName) + tcBold('3',cComp) + tcBold('4',cVeh) + '</w:tr>' +
+    guestRows +
+    '</w:tbl>' +
+
+    '<w:p/><w:p/>' +
+
+    // Approver table (no borders)
+    '<w:tbl><w:tblPr><w:tblW w:w="'+cw+'" w:type="dxa"/><w:tblBorders><w:top w:val="none" w:sz="0" w:space="0" w:color="auto"/><w:left w:val="none" w:sz="0" w:space="0" w:color="auto"/><w:bottom w:val="none" w:sz="0" w:space="0" w:color="auto"/><w:right w:val="none" w:sz="0" w:space="0" w:color="auto"/><w:insideH w:val="none" w:sz="0" w:space="0" w:color="auto"/><w:insideV w:val="none" w:sz="0" w:space="0" w:color="auto"/></w:tblBorders></w:tblPr>' +
+    '<w:tr>' + tcNoBdr('Sifari\u015f verdi:',2500,true) + tcNoBdr('',1500) + tcNoBdr(meta.approverTitle,3000,false,true) + tcNoBdr('',500) + tcNoBdr(meta.approverName,apprW5,false,true) + '</w:tr>' +
+    '<w:tr>' + tcNoBdr('',2500) + tcNoBdr('',1500) + tcNoBdr('(v\u0259zif\u0259si)',3000,false,true) + tcNoBdr('',500) + tcNoBdr('(ad\u0131, soyad\u0131)',apprW5,false,true) + '</w:tr>' +
+    '</w:tbl>' +
+
+    '<w:p/>' +
+
+    // Notes
+    '<w:p><w:r><w:rPr><w:b/><w:sz w:val="18"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/></w:rPr><w:t xml:space="preserve">Qeyd. </w:t></w:r><w:r><w:rPr><w:sz w:val="18"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/></w:rPr><w:t>1.Sifari\u015f t\u0259sdiq \u00fc\u00e7\u00fcn burax\u0131l\u0131\u015fa icaz\u0259 verm\u0259 s\u0259lahiyy\u0259tin\u0259 malik olan v\u0259zif\u0259li \u015f\u0259xs\u0259, icra \u00fc\u00e7\u00fcn is\u0259 "socar.reception" \u00fcnvan\u0131na g\u00f6nd\u0259rilm\u0259lidir.</w:t></w:r></w:p>' +
+    '<w:p><w:r><w:rPr><w:sz w:val="18"/><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/></w:rPr><w:t>2. 4-c\u00fc s\u00fctun qona\u011f\u0131n "SOCAR-Tower"-in \u0259razisin\u0259 avtomobill\u0259 daxil olaca\u011f\u0131 t\u0259qdird\u0259 doldurulmal\u0131d\u0131r.</w:t></w:r></w:p>' +
+
+    '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="850" w:right="850" w:bottom="850" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr>' +
+    '</w:body></w:document>';
+
+  var contentTypes = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
+    '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>' +
+    '<Default Extension="xml" ContentType="application/xml"/>' +
+    '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>' +
+    '</Types>';
+
+  var rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+    '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>' +
+    '</Relationships>';
+
+  var wordRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+    '</Relationships>';
+
+  return MiniZip.createZip([
+    { name: '[Content_Types].xml', content: contentTypes },
+    { name: '_rels/.rels', content: rels },
+    { name: 'word/_rels/document.xml.rels', content: wordRels },
+    { name: 'word/document.xml', content: documentXml }
+  ]);
+}
+
+function escXml(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+}
+
+// ══════════════════════════════════════════════════════════
+// APP STATE & LOGIC
+// ══════════════════════════════════════════════════════════
 var attendees = [];
 var selectedIds = new Set();
-var meetingData = { subject: '', dateTime: '', organizer: '', department: '', ext: '' };
+var meetingData = { subject:'', dateTime:'', organizer:'', department:'', ext:'' };
 
 var SUBSIDIARIES = [
   "SOCAR-\u0131n Ba\u015f ofisi","Azneft","Az\u0259riqaz","Az\u0259rikimya","SDM","CIC",
@@ -207,13 +435,7 @@ Office.onReady(function(info) {
   if (info.host === Office.HostType.Outlook) {
     loadFromOutlook();
   } else {
-    meetingData = {
-      subject: 'Test Meeting',
-      dateTime: formatDate(new Date()),
-      organizer: 'Test User',
-      department: 'Test Dept',
-      ext: '00000'
-    };
+    meetingData = { subject:'Test Meeting', dateTime:formatDate(new Date()), organizer:'Test User', department:'Test Dept', ext:'00000' };
     updateMeetingBar();
     document.getElementById('fDept').value = meetingData.department;
     document.getElementById('fContact').value = meetingData.organizer;
@@ -223,472 +445,127 @@ Office.onReady(function(info) {
 
 function loadFromOutlook() {
   var item = Office.context.mailbox.item;
-
-  item.subject.getAsync(function(r) {
-    if (r.status === Office.AsyncResultStatus.Succeeded) {
-      meetingData.subject = r.value || 'G\u00f6r\u00fc\u015f';
-      updateMeetingBar();
-    }
-  });
-
-  item.start.getAsync(function(r) {
-    if (r.status === Office.AsyncResultStatus.Succeeded) {
-      meetingData.dateTime = formatDate(r.value);
-      updateMeetingBar();
-    }
-  });
-
-  try {
-    var profile = Office.context.mailbox.userProfile;
-    meetingData.organizer = profile.displayName || '';
-    document.getElementById('fContact').value = meetingData.organizer;
-  } catch(e) {}
-
+  item.subject.getAsync(function(r) { if (r.status === Office.AsyncResultStatus.Succeeded) { meetingData.subject = r.value || 'G\u00f6r\u00fc\u015f'; updateMeetingBar(); } });
+  item.start.getAsync(function(r) { if (r.status === Office.AsyncResultStatus.Succeeded) { meetingData.dateTime = formatDate(r.value); updateMeetingBar(); } });
+  try { var p = Office.context.mailbox.userProfile; meetingData.organizer = p.displayName || ''; document.getElementById('fContact').value = meetingData.organizer; } catch(e) {}
   item.requiredAttendees.getAsync(function(r) {
     if (r.status === Office.AsyncResultStatus.Succeeded) {
-      var required = (r.value || []).map(function(a, i) {
-        return {
-          id: i,
-          name: a.displayName || a.emailAddress,
-          email: a.emailAddress,
-          company: guessCompany(a.emailAddress),
-          vehicle: '',
-          type: 'required'
-        };
-      });
-
+      var req = (r.value||[]).map(function(a,i) { return { id:i, name:a.displayName||a.emailAddress, email:a.emailAddress, company:guessCompany(a.emailAddress), vehicle:'', type:'required' }; });
       item.optionalAttendees.getAsync(function(r2) {
-        var optional = [];
-        if (r2.status === Office.AsyncResultStatus.Succeeded) {
-          optional = (r2.value || []).map(function(a, i) {
-            return {
-              id: required.length + i,
-              name: a.displayName || a.emailAddress,
-              email: a.emailAddress,
-              company: guessCompany(a.emailAddress),
-              vehicle: '',
-              type: 'optional'
-            };
-          });
-        }
-        attendees = required.concat(optional);
-        document.getElementById('step0desc').innerHTML =
-          attendees.length + ' attendee \u00fc\u00e7\u00fcn Forma 1 haz\u0131rlanacaq<br>v\u0259 reception-a g\u00f6nd\u0259ril\u0259c\u0259k';
+        var opt = [];
+        if (r2.status === Office.AsyncResultStatus.Succeeded) opt = (r2.value||[]).map(function(a,i) { return { id:req.length+i, name:a.displayName||a.emailAddress, email:a.emailAddress, company:guessCompany(a.emailAddress), vehicle:'', type:'optional' }; });
+        attendees = req.concat(opt);
+        document.getElementById('step0desc').innerHTML = attendees.length + ' attendee \u00fc\u00e7\u00fcn Forma 1 haz\u0131rlanacaq<br>v\u0259 reception-a g\u00f6nd\u0259ril\u0259c\u0259k';
       });
     }
   });
 }
 
 function guessCompany(email) {
-  if (!email) return '';
-  email = email.toLowerCase();
-  if (email.indexOf('pwc') >= 0) return 'PwC';
-  if (email.indexOf('cic.socar') >= 0 || email.indexOf('@cic.') >= 0) return 'CIC';
-  if (email.indexOf('azeriqaz') >= 0) return 'Az\u0259riqaz';
-  if (email.indexOf('gei.socar') >= 0) return 'Qaz \u0130xrac \u0130dar\u0259si';
-  if (email.indexOf('azneft') >= 0) return 'Azneft';
-  if (email.indexOf('sdm') >= 0) return 'SDM';
-  if (email.indexOf('upstream') >= 0) return 'SOCAR Upstream';
-  if (email.indexOf('midstream') >= 0) return 'SOCAR Midstream';
-  if (email.indexOf('azerikimya') >= 0) return 'Az\u0259rikimya';
-  if (email.indexOf('neftqaz') >= 0) return 'NeftQazTikinti';
-  if (email.indexOf('polymer') >= 0) return 'SOCAR Polymer';
-  if (email.indexOf('downstream') >= 0) return 'SOCAR Downstream';
-  if (email.indexOf('socar.az') >= 0) return 'SOCAR-\u0131n Ba\u015f ofisi';
+  if (!email) return ''; email = email.toLowerCase();
+  if (email.indexOf('pwc')>=0) return 'PwC';
+  if (email.indexOf('cic.socar')>=0||email.indexOf('@cic.')>=0) return 'CIC';
+  if (email.indexOf('azeriqaz')>=0) return 'Az\u0259riqaz';
+  if (email.indexOf('gei.socar')>=0) return 'Qaz \u0130xrac \u0130dar\u0259si';
+  if (email.indexOf('azneft')>=0) return 'Azneft';
+  if (email.indexOf('sdm')>=0) return 'SDM';
+  if (email.indexOf('upstream')>=0) return 'SOCAR Upstream';
+  if (email.indexOf('midstream')>=0) return 'SOCAR Midstream';
+  if (email.indexOf('downstream')>=0) return 'SOCAR Downstream';
+  if (email.indexOf('azerikimya')>=0) return 'Az\u0259rikimya';
+  if (email.indexOf('neftqaz')>=0) return 'NeftQazTikinti';
+  if (email.indexOf('socar.az')>=0) return 'SOCAR-\u0131n Ba\u015f ofisi';
   return '';
 }
 
-function formatDate(d) {
-  var dd = String(d.getDate()).padStart(2,'0');
-  var mm = String(d.getMonth()+1).padStart(2,'0');
-  var yy = d.getFullYear();
-  var hh = String(d.getHours()).padStart(2,'0');
-  var mi = String(d.getMinutes()).padStart(2,'0');
-  return dd+'.'+mm+'.'+yy+', '+hh+':'+mi;
-}
-
-function updateMeetingBar() {
-  document.getElementById('mSubject').textContent = meetingData.subject;
-  document.getElementById('mDate').textContent = meetingData.dateTime;
-}
-
-function showStep(n) {
-  ['step0','step1','step2','step3','step4'].forEach(function(id) {
-    document.getElementById(id).classList.add('hidden');
-  });
-  document.getElementById('step'+n).classList.remove('hidden');
-}
-
-function startProcess() {
-  if (attendees.length === 0) {
-    attendees = [{ id: 0, name: '', email: '', company: '', vehicle: '', type: 'manual' }];
-  }
-  selectedIds = new Set(attendees.map(function(a) { return a.id; }));
-  renderAttendeeList();
-  showStep(1);
-}
-
-function goStep1() { showStep(1); }
-
-function goStep2() {
-  if (selectedIds.size === 0) return;
-  renderGuestDetails();
-  showStep(2);
-}
-
-function goStep2From3() { showStep(2); }
-
-function goStep3() {
-  renderPreview();
-  showStep(3);
-}
+function formatDate(d) { return String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+d.getFullYear()+', '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); }
+function updateMeetingBar() { document.getElementById('mSubject').textContent=meetingData.subject; document.getElementById('mDate').textContent=meetingData.dateTime; }
+function showStep(n) { ['step0','step1','step2','step3','step4'].forEach(function(id){document.getElementById(id).classList.add('hidden');}); document.getElementById('step'+n).classList.remove('hidden'); }
+function startProcess() { if(attendees.length===0) attendees=[{id:0,name:'',email:'',company:'',vehicle:'',type:'manual'}]; selectedIds=new Set(attendees.map(function(a){return a.id;})); renderAttendeeList(); showStep(1); }
+function goStep1(){showStep(1)} function goStep2(){if(selectedIds.size===0)return;renderGuestDetails();showStep(2)} function goStep2From3(){showStep(2)} function goStep3(){renderPreview();showStep(3)}
 
 function renderAttendeeList() {
-  var list = document.getElementById('attList');
-  var html = '';
-
-  attendees.forEach(function(a) {
-    var sel = selectedIds.has(a.id);
-    if (a.type === 'manual') {
-      html += '<div class="gcard" style="margin-bottom:6px;">' +
-        '<div style="display:flex;gap:7px;">' +
-        '<div class="fg"><label>Ad Soyad</label><input value="' + esc(a.name) + '" placeholder="Qona\u011f\u0131n ad\u0131 soyad\u0131" onchange="attendees[' + a.id + '].name=this.value" /></div>' +
-        '<div class="fg"><label>Email</label><input value="' + esc(a.email) + '" placeholder="email@company.com" onchange="attendees[' + a.id + '].email=this.value;attendees[' + a.id + '].company=guessCompany(this.value)" /></div>' +
-        '</div>' +
-        (a.id > 0 ? '<button class="btn btn-g" style="font-size:10px;padding:3px 8px;margin-top:4px;" onclick="removeManual(' + a.id + ')">Sil</button>' : '') +
-        '</div>';
+  var list=document.getElementById('attList'); var html='';
+  attendees.forEach(function(a){
+    var sel=selectedIds.has(a.id);
+    if(a.type==='manual'){
+      html+='<div class="gcard" style="margin-bottom:6px;"><div style="display:flex;gap:7px;"><div class="fg"><label>Ad Soyad</label><input value="'+esc(a.name)+'" placeholder="Qona\u011f\u0131n ad\u0131 soyad\u0131" onchange="attendees['+a.id+'].name=this.value"/></div><div class="fg"><label>Email</label><input value="'+esc(a.email)+'" placeholder="email@company.com" onchange="attendees['+a.id+'].email=this.value;attendees['+a.id+'].company=guessCompany(this.value)"/></div></div>'+(a.id>0?'<button class="btn btn-g" style="font-size:10px;padding:3px 8px;margin-top:4px;" onclick="removeManual('+a.id+')">Sil</button>':'')+'</div>';
     } else {
-      html += '<div class="att-row ' + (sel ? 'sel' : '') + '" onclick="toggleAtt(' + a.id + ')">' +
-        '<input type="checkbox" ' + (sel ? 'checked' : '') + ' onclick="event.stopPropagation();toggleAtt(' + a.id + ')" />' +
-        '<div style="flex:1">' +
-        '<div class="att-name">' + esc(a.name) + '</div>' +
-        '<div class="att-email">' + esc(a.email) + '</div>' +
-        '</div>' +
-        (a.company ? '<span class="att-badge">' + esc(a.company) + '</span>' : '') +
-        '</div>';
+      html+='<div class="att-row '+(sel?'sel':'')+'" onclick="toggleAtt('+a.id+')"><input type="checkbox" '+(sel?'checked':'')+' onclick="event.stopPropagation();toggleAtt('+a.id+')"/><div style="flex:1"><div class="att-name">'+esc(a.name)+'</div><div class="att-email">'+esc(a.email)+'</div></div>'+(a.company?'<span class="att-badge">'+esc(a.company)+'</span>':'')+'</div>';
     }
   });
-
-  html += '<button class="btn btn-g" style="width:100%;margin-top:8px;font-size:12px;" onclick="addManualGuest()">+ \u018fl il\u0259 qonaq \u0259lav\u0259 et</button>';
-  list.innerHTML = html;
-
-  var cnt = selectedIds.size;
-  document.getElementById('attTitle').textContent = 'Attendee-l\u0259ri se\u00e7 (' + cnt + ')';
-  document.getElementById('btnToStep2').textContent = 'Davam et (' + cnt + ' n\u0259f\u0259r)';
+  html+='<button class="btn btn-g" style="width:100%;margin-top:8px;font-size:12px;" onclick="addManualGuest()">+ \u018fl il\u0259 qonaq \u0259lav\u0259 et</button>';
+  list.innerHTML=html;
+  document.getElementById('attTitle').textContent='Attendee-l\u0259ri se\u00e7 ('+selectedIds.size+')';
+  document.getElementById('btnToStep2').textContent='Davam et ('+selectedIds.size+' n\u0259f\u0259r)';
 }
 
-function toggleAtt(id) {
-  if (selectedIds.has(id)) selectedIds.delete(id); else selectedIds.add(id);
-  renderAttendeeList();
-}
-
-function addManualGuest() {
-  var newId = attendees.length;
-  attendees.push({ id: newId, name: '', email: '', company: '', vehicle: '', type: 'manual' });
-  selectedIds.add(newId);
-  renderAttendeeList();
-}
-
-function removeManual(id) {
-  attendees = attendees.filter(function(a) { return a.id !== id; });
-  selectedIds.delete(id);
-  renderAttendeeList();
-}
+function toggleAtt(id){if(selectedIds.has(id))selectedIds.delete(id);else selectedIds.add(id);renderAttendeeList();}
+function addManualGuest(){var n=attendees.length;attendees.push({id:n,name:'',email:'',company:'',vehicle:'',type:'manual'});selectedIds.add(n);renderAttendeeList();}
+function removeManual(id){attendees=attendees.filter(function(a){return a.id!==id;});selectedIds.delete(id);renderAttendeeList();}
 
 function renderGuestDetails() {
-  var container = document.getElementById('guestDetails');
-  var active = getActiveGuests();
-  var html = '';
-
-  active.forEach(function(g, i) {
-    var opts = SUBSIDIARIES.map(function(s) {
-      return '<option value="' + esc(s) + '" ' + (g.company === s ? 'selected' : '') + '>' + esc(s) + '</option>';
-    }).join('');
-
-    html += '<div class="gcard">' +
-      '<div class="gcard-num">' + (i+1) + '</div>' +
-      '<div class="gcard-name">' + (esc(g.name) || '(ad daxil edin)') + '</div>' +
-      '<div style="display:flex;gap:7px;">' +
-      '<div class="fg" style="flex:2"><label>M\u00fc\u0259ssis\u0259 / \u015eirk\u0259t</label>' +
-      '<select onchange="updateGuestField(' + g.id + ',\'company\',this.value)">' +
-      '<option value="">Se\u00e7in...</option>' + opts + '</select></div>' +
-      '<div class="fg" style="flex:1"><label>N\u0259qliyyat (varsa)</label>' +
-      '<input value="' + esc(g.vehicle) + '" placeholder="99-XX-000" onchange="updateGuestField(' + g.id + ',\'vehicle\',this.value)" /></div>' +
-      '</div></div>';
+  var c=document.getElementById('guestDetails');var active=getActiveGuests();var html='';
+  active.forEach(function(g,i){
+    var opts=SUBSIDIARIES.map(function(s){return '<option value="'+esc(s)+'" '+(g.company===s?'selected':'')+'>'+esc(s)+'</option>';}).join('');
+    html+='<div class="gcard"><div class="gcard-num">'+(i+1)+'</div><div class="gcard-name">'+(esc(g.name)||'(ad daxil edin)')+'</div><div style="display:flex;gap:7px;"><div class="fg" style="flex:2"><label>M\u00fc\u0259ssis\u0259 / \u015eirk\u0259t</label><select onchange="updateGuestField('+g.id+',\'company\',this.value)"><option value="">Se\u00e7in...</option>'+opts+'</select></div><div class="fg" style="flex:1"><label>N\u0259qliyyat (varsa)</label><input value="'+esc(g.vehicle)+'" placeholder="99-XX-000" onchange="updateGuestField('+g.id+',\'vehicle\',this.value)"/></div></div></div>';
   });
-
-  container.innerHTML = html;
+  c.innerHTML=html;
 }
 
-function updateGuestField(id, field, val) {
-  var a = attendees.find(function(x) { return x.id === id; });
-  if (a) a[field] = val;
-}
-
-function getActiveGuests() {
-  return attendees.filter(function(a) { return selectedIds.has(a.id) || a.type === 'manual'; });
-}
+function updateGuestField(id,f,v){var a=attendees.find(function(x){return x.id===id;});if(a)a[f]=v;}
+function getActiveGuests(){return attendees.filter(function(a){return selectedIds.has(a.id)||a.type==='manual';});}
 
 function renderPreview() {
-  var guests = getActiveGuests();
-  var meta = getFormMeta();
-
-  var fHtml = '<div style="text-align:center;margin-bottom:8px;">' +
-    '<div style="font-weight:700;font-size:12px;">"SOCAR Tower"-\u0259 burax\u0131l\u0131\u015f \u00fc\u00e7\u00fcn</div>' +
-    '<div style="font-weight:700;letter-spacing:3px;">S \u0130 F A R \u0130 \u015e</div></div>' +
-    '<table><tbody>' +
-    '<tr class="info-row"><td>B\u00f6lm\u0259</td><td>' + esc(meta.department) + '</td></tr>' +
-    '<tr class="info-row"><td>M\u0259qs\u0259d</td><td>' + esc(meta.purpose) + '</td></tr>' +
-    '<tr class="info-row"><td>Yer</td><td>' + esc(meta.location) + '</td></tr>' +
-    '<tr class="info-row"><td>M\u00fcdd\u0259t</td><td>' + esc(meta.period) + '</td></tr>' +
-    '</tbody></table>' +
-    '<table style="margin-top:8px;"><thead><tr><th>\u2116</th><th>Ad Soyad</th><th>M\u00fc\u0259ssis\u0259</th><th>N\u0259qliyyat</th></tr></thead><tbody>';
-
-  guests.forEach(function(g, i) {
-    fHtml += '<tr><td>' + (i+1) + '</td><td>' + esc(g.name) + '</td><td>' + esc(g.company) + '</td><td>' + (esc(g.vehicle) || '\u2014') + '</td></tr>';
-  });
-  fHtml += '</tbody></table>';
-  document.getElementById('previewForma').innerHTML = fHtml;
-
-  var recipient = document.getElementById('fRecipient').value;
-  document.getElementById('emailMeta').innerHTML =
-    '<b>To:</b> ' + esc(recipient) + '<br>' +
-    '<b>Subject:</b> Burax\u0131l\u0131\u015f sifari\u015fi \u2014 ' + esc(meetingData.subject) + ' (' + esc(meta.period) + ')<br>' +
-    '<b>Attach:</b> \uD83D\uDCCE forma1_buraxilis.docx';
-  document.getElementById('emailBody').textContent = buildEmailText(guests, meta);
+  var guests=getActiveGuests();var meta=getFormMeta();
+  var fH='<div style="text-align:center;margin-bottom:8px;"><div style="font-weight:700;font-size:12px;">"SOCAR Tower"-\u0259 burax\u0131l\u0131\u015f \u00fc\u00e7\u00fcn</div><div style="font-weight:700;letter-spacing:3px;">S \u0130 F A R \u0130 \u015e</div></div><table><tbody><tr class="info-row"><td>B\u00f6lm\u0259</td><td>'+esc(meta.department)+'</td></tr><tr class="info-row"><td>M\u0259qs\u0259d</td><td>'+esc(meta.purpose)+'</td></tr><tr class="info-row"><td>Yer</td><td>'+esc(meta.location)+'</td></tr><tr class="info-row"><td>M\u00fcdd\u0259t</td><td>'+esc(meta.period)+'</td></tr></tbody></table><table style="margin-top:8px;"><thead><tr><th>\u2116</th><th>Ad Soyad</th><th>M\u00fc\u0259ssis\u0259</th><th>N\u0259qliyyat</th></tr></thead><tbody>';
+  guests.forEach(function(g,i){fH+='<tr><td>'+(i+1)+'</td><td>'+esc(g.name)+'</td><td>'+esc(g.company)+'</td><td>'+(esc(g.vehicle)||'\u2014')+'</td></tr>';});
+  fH+='</tbody></table>';
+  document.getElementById('previewForma').innerHTML=fH;
+  var r=document.getElementById('fRecipient').value;
+  document.getElementById('emailMeta').innerHTML='<b>To:</b> '+esc(r)+'<br><b>Subject:</b> Burax\u0131l\u0131\u015f sifari\u015fi \u2014 '+esc(meetingData.subject)+' ('+esc(meta.period)+')<br><b>Attach:</b> \uD83D\uDCCE forma1_buraxilis.docx';
+  document.getElementById('emailBody').textContent=buildEmailText(meta);
 }
 
-function getFormMeta() {
-  return {
-    purpose: document.getElementById('fPurpose').value,
-    location: document.getElementById('fLocation').value,
-    period: document.getElementById('fPeriod').value,
-    department: document.getElementById('fDept').value,
-    contact: document.getElementById('fContact').value,
-    ext: document.getElementById('fExt').value,
-    approverName: document.getElementById('fApprName').value,
-    approverTitle: document.getElementById('fApprTitle').value,
-  };
-}
+function getFormMeta(){return{purpose:document.getElementById('fPurpose').value,location:document.getElementById('fLocation').value,period:document.getElementById('fPeriod').value,department:document.getElementById('fDept').value,contact:document.getElementById('fContact').value,ext:document.getElementById('fExt').value,approverName:document.getElementById('fApprName').value,approverTitle:document.getElementById('fApprTitle').value};}
+function buildEmailText(meta){return 'H\u00f6rm\u0259tli h\u0259mkarlar,\n\nQo\u015fmadak\u0131 h\u0259mkarlar\u0131n Ba\u015f Ofis\u0259 burax\u0131l\u0131\u015f\u0131 il\u0259 ba\u011fl\u0131 d\u0259st\u0259yinizi xahi\u015f edirik.\n\nH\u00f6rm\u0259tl\u0259,\n'+meta.contact;}
+function buildEmailHtml(meta){return '<div style="font-family:Segoe UI,sans-serif;font-size:13px;color:#323130;"><p>H\u00f6rm\u0259tli h\u0259mkarlar,</p><p>Qo\u015fmadak\u0131 h\u0259mkarlar\u0131n Ba\u015f Ofis\u0259 burax\u0131l\u0131\u015f\u0131 il\u0259 ba\u011fl\u0131 d\u0259st\u0259yinizi xahi\u015f edirik.</p><p>H\u00f6rm\u0259tl\u0259,<br/><strong>'+esc(meta.contact)+'</strong></p></div>';}
 
-function buildEmailText(guests, meta) {
-  return 'H\u00f6rm\u0259tli h\u0259mkarlar,\n\nQo\u015fmadak\u0131 h\u0259mkarlar\u0131n Ba\u015f Ofis\u0259 burax\u0131l\u0131\u015f\u0131 il\u0259 ba\u011fl\u0131 d\u0259st\u0259yinizi xahi\u015f edirik.\n\nH\u00f6rm\u0259tl\u0259,\n' + meta.contact;
-}
-
-function buildEmailHtml(guests, meta) {
-  return '<div style="font-family:Segoe UI,sans-serif;font-size:13px;color:#323130;">' +
-    '<p>H\u00f6rm\u0259tli h\u0259mkarlar,</p>' +
-    '<p>Qo\u015fmadak\u0131 h\u0259mkarlar\u0131n Ba\u015f Ofis\u0259 burax\u0131l\u0131\u015f\u0131 il\u0259 ba\u011fl\u0131 d\u0259st\u0259yinizi xahi\u015f edirik.</p>' +
-    '<p>H\u00f6rm\u0259tl\u0259,<br/><strong>' + esc(meta.contact) + '</strong></p></div>';
-}
-
-async function generateForma1Docx(guests, meta) {
-  var D = docx;
-  var thin = { style: D.BorderStyle.SINGLE, size: 1, color: "000000" };
-  var brd = { top:thin, bottom:thin, left:thin, right:thin };
-  var cm = { top:40, bottom:40, left:80, right:80 };
-  var pw = 11906, ml = 1134, mr = 850;
-  var cw = pw - ml - mr;
-  var ilw = 3200, ivw = cw - ilw;
-  var cNo=600, cName=3400, cComp=3400, cVeh=cw-cNo-cName-cComp;
-
-  function infoRow(label, value) {
-    return new D.TableRow({ children: [
-      new D.TableCell({
-        width:{size:ilw,type:D.WidthType.DXA}, borders:brd, margins:cm, verticalAlign:D.VerticalAlign.CENTER,
-        children: label.split('\n').map(function(l) { return new D.Paragraph({children:[new D.TextRun({text:l,bold:true,size:22,font:'Times New Roman'})]}); })
-      }),
-      new D.TableCell({
-        width:{size:ivw,type:D.WidthType.DXA}, borders:brd, margins:cm, verticalAlign:D.VerticalAlign.CENTER,
-        children: [new D.Paragraph({children:[new D.TextRun({text:value,italics:true,size:22,font:'Times New Roman'})]})]
-      })
-    ]});
-  }
-
-  function hdrCell(text, w) {
-    return new D.TableCell({
-      width:{size:w,type:D.WidthType.DXA}, borders:brd, margins:cm, verticalAlign:D.VerticalAlign.CENTER,
-      children: text.split('\n').map(function(l) { return new D.Paragraph({alignment:D.AlignmentType.CENTER, children:[new D.TextRun({text:l,bold:true,size:20,font:'Times New Roman'})]}); })
-    });
-  }
-
-  function cell(text, w, bold, align) {
-    return new D.TableCell({
-      width:{size:w,type:D.WidthType.DXA}, borders:brd, margins:cm, verticalAlign:D.VerticalAlign.CENTER,
-      children: [new D.Paragraph({alignment:align||D.AlignmentType.LEFT, children:[new D.TextRun({text:text,bold:!!bold,italics:!bold&&text!=='',size:20,font:'Times New Roman'})]})]
-    });
-  }
-
-  var today = new Date();
-  var months = ['yanvar','fevral','mart','aprel','may','iyun','iyul','avqust','sentyabr','oktyabr','noyabr','dekabr'];
-  var dateStr = String(today.getDate()).padStart(2,'0') + ' ' + months[today.getMonth()] + ' ' + today.getFullYear();
-
-  var noBrd = {top:{style:D.BorderStyle.NONE,size:0},bottom:{style:D.BorderStyle.NONE,size:0},left:{style:D.BorderStyle.NONE,size:0},right:{style:D.BorderStyle.NONE,size:0}};
-  function plainCell(text,w,bold,italic) {
-    return new D.TableCell({
-      width:{size:w,type:D.WidthType.DXA}, borders:noBrd, margins:cm,
-      children:[new D.Paragraph({children:[new D.TextRun({text:text,bold:!!bold,italics:!!italic,size:20,font:'Times New Roman'})]})]
-    });
-  }
-
-  var doc = new D.Document({
-    styles: { default: { document: { run: { font:'Times New Roman', size:22 } } } },
-    sections: [{
-      properties: {
-        page: { size:{width:pw,height:16838}, margin:{top:850,bottom:850,left:ml,right:mr} }
-      },
-      children: [
-        new D.Paragraph({alignment:D.AlignmentType.LEFT, spacing:{after:100}, children:[new D.TextRun({text:'Forma 1',italics:true,size:20,font:'Times New Roman'})]}),
-        new D.Paragraph({alignment:D.AlignmentType.CENTER, spacing:{before:100,after:40}, children:[new D.TextRun({text:'"SOCAR Tower"-\u0259 burax\u0131l\u0131\u015f \u00fc\u00e7\u00fcn',bold:true,size:24,font:'Times New Roman'})]}),
-        new D.Paragraph({alignment:D.AlignmentType.CENTER, spacing:{after:100}, children:[new D.TextRun({text:'S \u0130 F A R \u0130 \u015e',bold:true,size:24,font:'Times New Roman'})]}),
-        new D.Paragraph({alignment:D.AlignmentType.RIGHT, spacing:{after:200}, children:[new D.TextRun({text:dateStr,italics:true,size:22,font:'Times New Roman'})]}),
-
-        new D.Table({
-          width:{size:cw,type:D.WidthType.DXA}, columnWidths:[ilw,ivw],
-          rows: [
-            infoRow('Sifari\u015fi ver\u0259n t\u0259\u015fkilat, m\u00fc\u0259ssis\u0259, struktur b\u00f6lm\u0259:', meta.department + ', \u0259laq\u0259li \u015f\u0259xs: ' + meta.contact + ' (' + meta.ext + ')'),
-            infoRow('D\u0259v\u0259tin m\u0259qs\u0259di:', meta.purpose),
-            infoRow('D\u0259v\u0259t olundu\u011fu yer:\n(m\u0259rt\u0259b\u0259)', meta.location),
-            infoRow('D\u0259v\u0259t olunma tarixi v\u0259 m\u00fcdd\u0259ti:\n(bir i\u015f h\u0259ft\u0259sind\u0259n art\u0131q olmamaqla)', meta.period),
-          ]
-        }),
-
-        new D.Paragraph({spacing:{before:200,after:100}, children:[]}),
-
-        new D.Table({
-          width:{size:cw,type:D.WidthType.DXA}, columnWidths:[cNo,cName,cComp,cVeh],
-          rows: [
-            new D.TableRow({children:[
-              hdrCell('S\u0131ra\n\u2116',cNo), hdrCell('Soyad\u0131, ad\u0131',cName),
-              hdrCell('T\u0259msil etdiyi\nM\u00fc\u0259ssis\u0259 / \u015eirk\u0259t / \u00d6lk\u0259',cComp),
-              hdrCell('N\u0259qliyyat vasit\u0259si\nMarkas\u0131 / d\u00f6vl\u0259t n\u00f6mr\u0259 ni\u015fan\u0131',cVeh),
-            ]}),
-            new D.TableRow({children:[
-              cell('1',cNo,true,D.AlignmentType.CENTER), cell('2',cName,true,D.AlignmentType.CENTER),
-              cell('3',cComp,true,D.AlignmentType.CENTER), cell('4',cVeh,true,D.AlignmentType.CENTER),
-            ]}),
-          ].concat(guests.map(function(g,i) {
-            return new D.TableRow({children:[
-              cell(''+(i+1),cNo,false,D.AlignmentType.CENTER), cell(g.name,cName),
-              cell(g.company,cComp), cell(g.vehicle||'',cVeh),
-            ]});
-          })).concat([
-            new D.TableRow({children:[
-              cell('',cNo,false,D.AlignmentType.CENTER), cell('',cName), cell('',cComp), cell('',cVeh),
-            ]})
-          ])
-        }),
-
-        new D.Paragraph({spacing:{before:300}, children:[]}),
-
-        new D.Table({
-          width:{size:cw,type:D.WidthType.DXA}, columnWidths:[2500,1500,3000,500,cw-2500-1500-3000-500],
-          rows: [
-            new D.TableRow({children:[
-              plainCell('Sifari\u015f verdi:',2500,true), plainCell('',1500),
-              plainCell(meta.approverTitle,3000,false,true), plainCell('',500),
-              plainCell(meta.approverName,cw-2500-1500-3000-500,false,true),
-            ]}),
-            new D.TableRow({children:[
-              plainCell('',2500), plainCell('',1500),
-              plainCell('(v\u0259zif\u0259si)',3000,false,true), plainCell('',500),
-              plainCell('(ad\u0131, soyad\u0131)',cw-2500-1500-3000-500,false,true),
-            ]}),
-          ]
-        }),
-
-        new D.Paragraph({spacing:{before:300}, children:[]}),
-        new D.Paragraph({spacing:{after:60}, children:[
-          new D.TextRun({text:'Qeyd. ',bold:true,size:18,font:'Times New Roman'}),
-          new D.TextRun({text:'1.Sifari\u015f t\u0259sdiq \u00fc\u00e7\u00fcn burax\u0131l\u0131\u015fa icaz\u0259 verm\u0259 s\u0259lahiyy\u0259tin\u0259 malik olan v\u0259zif\u0259li \u015f\u0259xs\u0259, icra \u00fc\u00e7\u00fcn is\u0259 "socar.reception" \u00fcnvan\u0131na g\u00f6nd\u0259rilm\u0259lidir.',size:18,font:'Times New Roman'}),
-        ]}),
-        new D.Paragraph({children:[
-          new D.TextRun({text:'2. 4-c\u00fc s\u00fctun qona\u011f\u0131n "SOCAR-Tower"-in \u0259razisin\u0259 avtobmobill\u0259 daxil olaca\u011f\u0131 t\u0259qdird\u0259 doldurulmal\u0131d\u0131r.',size:18,font:'Times New Roman'}),
-        ]}),
-      ]
-    }]
-  });
-
-  var blob = await D.Packer.toBlob(doc);
-  return blob;
-}
-
-async function sendAll() {
-  var btn = document.getElementById('btnSend');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Haz\u0131rlan\u0131r...';
-
+function sendAll() {
+  var btn=document.getElementById('btnSend');
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Haz\u0131rlan\u0131r...';
   try {
-    var guests = getActiveGuests();
-    var meta = getFormMeta();
-    var recipient = document.getElementById('fRecipient').value;
+    var guests=getActiveGuests();var meta=getFormMeta();var recipient=document.getElementById('fRecipient').value;
+    var blob=generateDocxBlob(guests,meta);
 
-    var blob = await generateForma1Docx(guests, meta);
+    // Download the file
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');a.href=url;a.download='forma1_buraxilis.docx';document.body.appendChild(a);a.click();document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 
-    var reader = new FileReader();
-    reader.onloadend = function() {
-      var base64 = reader.result.split(',')[1];
-
-      try {
-        Office.context.mailbox.displayNewMessageFormAsync({
-          toRecipients: [recipient],
-          subject: 'Burax\u0131l\u0131\u015f sifari\u015fi \u2014 ' + meetingData.subject + ' (' + meta.period + ')',
-          htmlBody: buildEmailHtml(guests, meta),
-          attachments: [{
-            type: Office.MailboxEnums.AttachmentType.File,
-            name: 'forma1_buraxilis.docx',
-            url: 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + base64,
-            isInline: false
-          }]
-        }, function(result) {
-          if (result.status === Office.AsyncResultStatus.Failed) {
-            fallbackSend(blob, recipient, meta);
-          }
-          showDone(guests.length, recipient);
-        });
-      } catch(e) {
-        saveAs(blob, 'forma1_buraxilis.docx');
-        showDone(guests.length, recipient);
-      }
-    };
-    reader.readAsDataURL(blob);
-
+    // Open email
+    try {
+      Office.context.mailbox.displayNewMessageForm({
+        toRecipients:[recipient],
+        subject:'Burax\u0131l\u0131\u015f sifari\u015fi \u2014 '+meetingData.subject+' ('+meta.period+')',
+        htmlBody:buildEmailHtml(meta)
+      });
+    } catch(e) {
+      var subj=encodeURIComponent('Burax\u0131l\u0131\u015f sifari\u015fi \u2014 '+meetingData.subject+' ('+meta.period+')');
+      var body=encodeURIComponent(buildEmailText(meta));
+      window.open('mailto:'+recipient+'?subject='+subj+'&body='+body);
+    }
+    showDone(guests.length,recipient);
   } catch(err) {
-    btn.disabled = false;
-    btn.innerHTML = '\uD83D\uDCE7 G\u00f6nd\u0259r + Forma 1';
-    showStatus('err', 'X\u0259ta: ' + err.message);
+    btn.disabled=false;btn.innerHTML='\uD83D\uDCE7 G\u00f6nd\u0259r + Forma 1';
+    showStatus('err','X\u0259ta: '+err.message);
   }
 }
 
-function fallbackSend(blob, recipient, meta) {
-  saveAs(blob, 'forma1_buraxilis.docx');
-  var subject = encodeURIComponent('Burax\u0131l\u0131\u015f sifari\u015fi \u2014 ' + meetingData.subject + ' (' + meta.period + ')');
-  var body = encodeURIComponent('H\u00f6rm\u0259tli h\u0259mkarlar,\n\nQo\u015fmadak\u0131 h\u0259mkarlar\u0131n Ba\u015f Ofis\u0259 burax\u0131l\u0131\u015f\u0131 il\u0259 ba\u011fl\u0131 d\u0259st\u0259yinizi xahi\u015f edirik.\n\nH\u00f6rm\u0259tl\u0259,\n' + meta.contact);
-  window.open('mailto:' + recipient + '?subject=' + subject + '&body=' + body);
-}
-
-function showDone(count, recipient) {
-  document.getElementById('doneMsg').innerHTML =
-    'Forma 1 (' + count + ' n\u0259f\u0259r) Word format\u0131nda<br><b>' + esc(recipient) + '</b> \u00fcnvan\u0131na g\u00f6nd\u0259rildi.';
-  showStep(4);
-}
-
-function showStatus(type, msg) {
-  var bar = document.getElementById('statusBar');
-  bar.className = 'status ' + (type === 'err' ? 'err' : 'ok');
-  bar.textContent = msg;
-  bar.classList.remove('hidden');
-}
-
-function resetAll() {
-  selectedIds = new Set(attendees.map(function(a) { return a.id; }));
-  showStep(0);
-}
-
-function esc(s) {
-  if (!s) return '';
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+function showDone(count,recipient){document.getElementById('doneMsg').innerHTML='Forma 1 ('+count+' n\u0259f\u0259r) Word format\u0131nda y\u00fckl\u0259ndi<br><b>'+esc(recipient)+'</b> \u00fcnvan\u0131na email a\u00e7\u0131ld\u0131.';showStep(4);}
+function showStatus(type,msg){var b=document.getElementById('statusBar');b.className='status '+(type==='err'?'err':'ok');b.textContent=msg;b.classList.remove('hidden');}
+function resetAll(){selectedIds=new Set(attendees.map(function(a){return a.id;}));showStep(0);}
+function esc(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 </script>
 </body>
 </html>
