@@ -49,10 +49,10 @@
   
   <div class="wrap">
     <div id="step0" class="hidden" style="text-align:center;padding:20px 0;">
-       <div style="font-size:40px;margin-bottom:10px;">&#x1F4CB;</div>
-       <h2>Buraxılış forması hazırlansın?</h2>
-       <p style="color:var(--txt2);margin-bottom:20px;">Dəvətli şəxslər üçün Forma 1 generate ediləcək.</p>
-       <button class="btn btn-p" onclick="startProcess()">Bəli, başla</button>
+        <div style="font-size:40px;margin-bottom:10px;">&#x1F4CB;</div>
+        <h2>Buraxılış forması hazırlansın?</h2>
+        <p style="color:var(--txt2);margin-bottom:20px;">Dəvətli şəxslər üçün Forma 1 generate ediləcək.</p>
+        <button class="btn btn-p" onclick="startProcess()">Bəli, başla</button>
     </div>
 
     <div id="step1" class="hidden">
@@ -143,31 +143,38 @@ Office.onReady(function(info){
 
 function loadOutlookData(){
   var item = Office.context.mailbox.item;
-  item.subject.getAsync(r => { meeting.subject = r.value; document.getElementById('mSubject').innerText = r.value; });
+  
+  // 1. Mövzu və Tarix
+  item.subject.getAsync(r => { if(r.value) { meeting.subject = r.value; document.getElementById('mSubject').innerText = r.value; } });
   item.start.getAsync(r => { 
-    meeting.start = r.value; 
-    document.getElementById('mDate').innerText = r.value.toLocaleDateString('az-AZ');
-    item.end.getAsync(r2 => { 
-       meeting.end = r2.value; 
-       document.getElementById('fPeriod').value = calcPeriod(meeting.start, meeting.end);
-    });
+    if(r.value) {
+      meeting.start = r.value; 
+      document.getElementById('mDate').innerText = r.value.toLocaleDateString('az-AZ');
+      item.end.getAsync(r2 => { 
+         if(r2.value) {
+           meeting.end = r2.value; 
+           document.getElementById('fPeriod').value = calcPeriod(meeting.start, meeting.end);
+         }
+      });
+    }
   });
 
+  // 2. Profil məlumatları
   var user = Office.context.mailbox.userProfile;
   meeting.organizer = user.displayName;
   document.getElementById('fContact').value = user.displayName;
   
-  // Resolve User Info (Organizer)
   resolveUser(user.emailAddress, (data) => {
     if(data.dept) document.getElementById('fDept').value = data.dept;
     if(data.ext) document.getElementById('fExt').value = data.ext;
   });
 
-  // Load Attendees
+  // 3. Paneli DƏRHAL açırıq
+  document.getElementById('step0').classList.remove('hidden');
+
+  // 4. Qonaqları arxa fonda yükləyirik
   item.requiredAttendees.getAsync(r => { if(r.value) addAtts(r.value, 'Z\u0259ruri'); });
   item.optionalAttendees.getAsync(r => { if(r.value) addAtts(r.value, 'K\u00f6m\u00fck\u00e7\u00fc'); });
-  
-  document.getElementById('step0').classList.remove('hidden');
 }
 
 function addAtts(list, type){
@@ -175,7 +182,6 @@ function addAtts(list, type){
     let id = "att_" + Math.random().toString(36).substr(2,9);
     let att = { id:id, name:a.displayName, email:a.emailAddress, type:type, company:guessCompany(a.emailAddress) };
     attendees.push(att);
-    // Resolve Company from EWS
     resolveUser(a.emailAddress, (data) => { if(data.company) att.company = data.company; });
   });
 }
@@ -208,13 +214,17 @@ function startProcess(){
 
 function renderAttList(){
   var html = '';
-  attendees.forEach(a => {
-    html += `<div class="att-row ${selectedIds.has(a.id)?'sel':''}" onclick="toggleAtt('${a.id}')">
-      <input type="checkbox" ${selectedIds.has(a.id)?'checked':''}/>
-      <div><div class="att-name">${a.name}</div><div class="att-email">${a.email}</div></div>
-      <div class="att-badge">${a.company || 'Xarici'}</div>
-    </div>`;
-  });
+  if(attendees.length === 0) {
+      html = '<div style="padding:10px; text-align:center; color:var(--txt2);">Qonaq tapılmadı və ya hələ yüklənir...</div>';
+  } else {
+      attendees.forEach(a => {
+        html += `<div class="att-row ${selectedIds.has(a.id)?'sel':''}" onclick="toggleAtt('${a.id}')">
+          <input type="checkbox" ${selectedIds.has(a.id)?'checked':''}/>
+          <div><div class="att-name">${a.name}</div><div class="att-email">${a.email}</div></div>
+          <div class="att-badge">${a.company || 'Xarici'}</div>
+        </div>`;
+      });
+  }
   document.getElementById('attList').innerHTML = html;
 }
 
@@ -236,7 +246,7 @@ function goStep2(){
       i++;
     }
   });
-  document.getElementById('guestDetails').innerHTML = html;
+  document.getElementById('guestDetails').innerHTML = html || '<div style="text-align:center; padding:10px;">Qonaq seçilməyib.</div>';
 }
 
 function updateG(id, val){
@@ -333,13 +343,11 @@ function finishAll(){
   var meta = getMeta();
   var blob = generateDocx(selected, meta);
   
-  // Download file
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
   a.href = url; a.download = "forma1_buraxilis.docx";
   document.body.appendChild(a); a.click();
   
-  // Open Email
   var body = `H\u00f6rm\u0259tli h\u0259mkarlar,\n\nQo\u015fmadak\u0131 h\u0259mkarlar\u0131n Ba\u015f Ofis\u0259 burax\u0131l\u0131\u015f\u0131 ilə bağlı dəstəyinizi xahiş edirik.\n\nH\u00f6rm\u0259tl\u0259,\n${meeting.organizer}`;
   
   Office.context.mailbox.displayNewMessageFormAsync({
