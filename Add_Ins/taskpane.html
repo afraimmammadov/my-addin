@@ -7,44 +7,49 @@
   <style>
     :root{--dark:#1a1a2e;--accent:#0078d4;--bg:#f4f5f7;--card:#fff;--bdr:#e1e4e8;--txt:#24292e;--txt2:#586069}
     body{font-family:'Segoe UI',sans-serif;font-size:13px;color:var(--txt);background:var(--bg);margin:0;padding:0}
-    .hdr{background:var(--dark);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px}
+    .hdr{background:var(--dark);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
     .wrap{padding:14px 16px}
-    .stitle{font-size:11.5px;font-weight:700;color:var(--dark);margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid var(--accent);display:inline-block}
-    .gcard{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px;margin-bottom:8px}
+    .stitle{font-size:11.5px;font-weight:700;color:var(--dark);margin-bottom:10px;padding-bottom:5px;border-bottom:2px solid var(--accent);display:inline-block;width:100%}
+    .gcard{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px;margin-bottom:8px;box-shadow: 0 1px 3px rgba(0,0,0,0.05)}
     .fg{display:flex;flex-direction:column;gap:2px;margin-bottom:8px}
     .fg label{font-size:10px;font-weight:600;color:var(--txt2)}
-    .fg input{border:1px solid var(--bdr);border-radius:5px;padding:6px 8px;font-size:12px;outline:none; width: 100%; box-sizing: border-box;}
-    .btn{padding:10px;border-radius:6px;font-weight:600;cursor:pointer;border:none;width:100%;margin-top:10px}
+    .fg input{border:1px solid var(--bdr);border-radius:5px;padding:6px 8px;font-size:12px;outline:none;width:100%;box-sizing:border-box}
+    .fg input:focus{border-color:var(--accent)}
+    .btn{padding:10px;border-radius:6px;font-weight:600;cursor:pointer;border:none;width:100%;margin-top:5px}
     .btn-p{background:var(--accent);color:#fff}
-    .info-msg{color:var(--txt2); font-style: italic; font-size: 11px; padding: 10px;}
+    .btn-s{background:#e1e4e8;color:var(--dark);font-size:11px;padding:5px 10px;width:auto}
+    .info-msg{color:var(--txt2);font-style:italic;font-size:11px;padding:10px;text-align:center}
   </style>
 </head>
 <body>
-  <div class="hdr"><div><h1 style="margin:0; font-size:18px;">Qonaq Buraxılışı</h1><p style="margin:0; font-size:11px; opacity:0.8;">Forma 1 — SOCAR Tower</p></div></div>
+  <div class="hdr">
+    <div><h1 style="margin:0;font-size:16px;">Qonaq Buraxılışı</h1><p style="margin:0;font-size:10px;opacity:0.8;">Forma 1 — SOCAR Tower</p></div>
+    <button class="btn btn-s" onclick="loadData()">Yenilə ↻</button>
+  </div>
 
   <div class="wrap">
     <div class="stitle">Qonaq detalları</div>
     <div id="guestList"><div class="info-msg">Qonaqlar axtarılır...</div></div>
 
-    <div class="stitle" style="margin-top:15px;">Sorğunu verən</div>
+    <div class="stitle" style="margin-top:10px;">Sorğunu verən</div>
     <div class="gcard">
-      <div class="fg"><label>Bölmə / Departament</label><input id="fDept" value=""/></div>
+      <div class="fg"><label>Bölmə / Departament</label><input id="fDept" placeholder="Yüklənir..."></div>
       <div style="display:flex;gap:7px;">
-        <div class="fg" style="flex:2"><label>Əlaqəli şəxs</label><input id="fContact" value=""/></div>
-        <div class="fg" style="flex:1"><label>Daxili nömrə</label><input id="fExt" value=""/></div>
+        <div class="fg" style="flex:2"><label>Əlaqəli şəxs</label><input id="fContact"></div>
+        <div class="fg" style="flex:1"><label>Daxili nömrə</label><input id="fExt"></div>
       </div>
-      <div class="fg"><label>Dəvətin məqsədi</label><input id="fPurpose" value="Layihə ilə əlaqədar"/></div>
+      <div class="fg"><label>Dəvətin məqsədi</label><input id="fPurpose" value="Layihə ilə əlaqədar"></div>
       <div style="display:flex;gap:7px;">
-        <div class="fg" style="flex:1"><label>Məkan</label><input id="fLocation" value="SOCAR Tower /19-cu mərtəbə"/></div>
-        <div class="fg" style="flex:1"><label>Müddət</label><input id="fPeriod" value=""/></div>
+        <div class="fg" style="flex:1"><label>Məkan</label><input id="fLocation" value="SOCAR Tower /19-cu mərtəbə"></div>
+        <div class="fg" style="flex:1"><label>Müddət</label><input id="fPeriod"></div>
       </div>
     </div>
 
     <div class="stitle">Təsdiq edən</div>
     <div class="gcard">
       <div style="display:flex;gap:7px;">
-        <div class="fg" style="flex:1"><label>Ad, Soyad</label><input id="fApprName" value="Gülnarə İsmayılova"/></div>
-        <div class="fg" style="flex:1"><label>Vəzifə</label><input id="fApprTitle" value="Şöbə rəisi"/></div>
+        <div class="fg" style="flex:1"><label>Ad, Soyad</label><input id="fApprName" value="Gülnarə İsmayılova"></div>
+        <div class="fg" style="flex:1"><label>Vəzifə</label><input id="fApprTitle" value="Şöbə rəisi"></div>
       </div>
     </div>
 
@@ -58,7 +63,10 @@
 <script>
 Office.onReady(function(info) {
   if (info.host === Office.HostType.Outlook) {
+    // İlk yükləmə
     loadData();
+    // Bəzən Outlook məlumatı gec verir, 2 saniyə sonra bir də yoxlayaq
+    setTimeout(loadData, 2000);
   }
 });
 
@@ -66,32 +74,40 @@ function loadData() {
   const item = Office.context.mailbox.item;
   const user = Office.context.mailbox.userProfile;
 
-  // Sizin məlumatlar
-  document.getElementById('fContact').value = user.displayName || "";
-  
-  // Exchange-dən əlavə detalları çəkək
-  if (user.emailAddress) {
+  if (!item) return;
+
+  // Profil məlumatları
+  if (user) {
+    document.getElementById('fContact').value = user.displayName || "";
     resolveUser(user.emailAddress, (data) => {
-        if(data.dept) document.getElementById('fDept').value = data.dept;
-        if(data.ext) document.getElementById('fExt').value = data.ext;
+      if(data.dept) document.getElementById('fDept').value = data.dept;
+      if(data.ext) document.getElementById('fExt').value = data.ext;
     });
   }
 
-  // Qonaqları gətir (Appointment Organizer Mode)
+  // Qonaqları gətirmə məntiqi
   try {
-    item.requiredAttendees.getAsync(function (result) {
-      if (result.status === Office.AsyncResultStatus.Succeeded && result.value.length > 0) {
+    // Həm required, həm optional attendees siyahısını birləşdirə bilərik
+    item.requiredAttendees.getAsync((result) => {
+      if (result.status === Office.AsyncResultStatus.Succeeded && result.value && result.value.length > 0) {
         processAttendees(result.value);
       } else {
-        document.getElementById('guestList').innerHTML = '<div class="info-msg">Qonaq tapılmadı. Zəhmət olmasa "Required" hissəsinə adam əlavə edin.</div>';
+        // Əgər required boşdursa, bəlkə qonaqlar "Optional" hissədədir?
+        item.optionalAttendees.getAsync((optResult) => {
+           if (optResult.status === Office.AsyncResultStatus.Succeeded && optResult.value.length > 0) {
+             processAttendees(optResult.value);
+           } else {
+             document.getElementById('guestList').innerHTML = '<div class="info-msg">Qonaq tapılmadı. Zəhmət olmasa Required/Optional hissəsinə adam əlavə edin.</div>';
+           }
+        });
       }
     });
-  } catch (e) {
-    document.getElementById('guestList').innerHTML = '<div class="info-msg">Xəta: Qonaqları oxumaq mümkün olmadı.</div>';
+  } catch (err) {
+    console.error(err);
   }
 
-  // Tarix
-  if(item.start) {
+  // Tarixi çək
+  if (item.start && item.end) {
     item.start.getAsync(s => {
       item.end.getAsync(e => {
         if(s.value && e.value) document.getElementById('fPeriod').value = calcPeriod(s.value, e.value);
@@ -103,15 +119,16 @@ function loadData() {
 function processAttendees(list) {
   let html = '';
   list.forEach((a, index) => {
-    let initialCompany = guessCompany(a.emailAddress);
+    if (!a.displayName && !a.emailAddress) return;
     let id = "att_" + index;
+    let name = a.displayName || a.emailAddress;
     html += `
       <div class="gcard">
-        <div style="font-weight:600; font-size:12px; margin-bottom:5px;">${index + 1}. ${a.displayName}</div>
+        <div style="font-weight:600; font-size:12px; margin-bottom:5px;">${index + 1}. ${name}</div>
         <div style="display:flex; gap:7px;">
           <div class="fg" style="flex:2">
             <label>Müəssisə / Şirkət</label>
-            <input list="companyList" id="comp_${id}" value="${initialCompany}">
+            <input list="companyList" id="comp_${id}" value="${guessCompany(a.emailAddress)}">
           </div>
           <div class="fg" style="flex:1">
             <label>Nəqliyyat</label>
@@ -120,31 +137,28 @@ function processAttendees(list) {
         </div>
       </div>`;
     
-    // Şirkət adını dəqiqləşdir
-    resolveUser(a.emailAddress, (data) => {
-      if(data.company) {
-        document.getElementById(`comp_${id}`).value = parseCompanyName(data.company);
-      }
-    });
+    if (a.emailAddress) {
+      resolveUser(a.emailAddress, (data) => {
+        if(data.company) document.getElementById(`comp_${id}`).value = parseCompanyName(data.company);
+      });
+    }
   });
-  document.getElementById('guestList').innerHTML = html;
+  document.getElementById('guestList').innerHTML = html || '<div class="info-msg">Qonaq məlumatı oxunarkən problem oldu.</div>';
 }
 
 function parseCompanyName(rawName) {
   if (!rawName) return "";
-  return rawName.indexOf(" - ") !== -1 ? rawName.split(" - ")[1].trim() : rawName;
+  return rawName.includes(" - ") ? rawName.split(" - ")[1].trim() : rawName;
 }
 
 function resolveUser(email, cb) {
-  var ews = '<?xml version="1.0" encoding="utf-8"?>'+
-    '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'+
-    '<soap:Header><t:RequestServerVersion Version="Exchange2013" /></soap:Header>'+
-    '<soap:Body><m:ResolveNames ReturnFullContactData="true"><m:UnresolvedEntry>'+email+'</m:UnresolvedEntry></m:ResolveNames></soap:Body></soap:Envelope>';
+  if (!email) return;
+  const ews = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Header><t:RequestServerVersion Version="Exchange2013" /></soap:Header><soap:Body><m:ResolveNames ReturnFullContactData="true"><m:UnresolvedEntry>'+email+'</m:UnresolvedEntry></m:ResolveNames></soap:Body></soap:Envelope>';
 
   Office.context.mailbox.makeEwsRequestAsync(ews, (res) => {
     if (res.status === "succeeded") {
-      var parser = new DOMParser();
-      var xml = parser.parseFromString(res.value, "text/xml");
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(res.value, "text/xml");
       cb({
         company: xml.getElementsByTagName("t:CompanyName")[0]?.textContent || "",
         dept: xml.getElementsByTagName("t:OfficeLocation")[0]?.textContent || xml.getElementsByTagName("t:Department")[0]?.textContent || "",
@@ -158,6 +172,7 @@ function guessCompany(em) {
   if(!em) return ""; em = em.toLowerCase();
   if(em.includes("socar.az")) return "ARDNŞ";
   if(em.includes("socardownstream")) return "SOCAR Downstream";
+  if(em.includes("pwc")) return "PwC";
   return "";
 }
 
