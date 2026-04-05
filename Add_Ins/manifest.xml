@@ -2,94 +2,45 @@
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
            xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" 
-           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" 
+           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides" 
            xsi:type="MailApp">
-  <Id>e9d8c7b6-a5b4-4321-8765-f4e3d2c1b0a9</Id>
-  <Version>6.1.0.0</Version>
-  <ProviderName>SOCAR</ProviderName>
-  <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Qonaq Buraxilisi"/>
-  <Description DefaultValue="Forma 1 Hazirlama Sistemi"/>
-  <IconUrl DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-64.png"/>
-  <HighResolutionIconUrl DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-128.png"/>
-  <SupportUrl DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/taskpane.html"/>
-  
+  <Id>ae546321-f091-4e22-835a-942668593456</Id>
+  <Version>1.0.0.2</Version>
+  <ProviderName>Afraim Mammadov</ProviderName>
+  <DefaultLocale>az-AZ</DefaultLocale>
+  <DisplayName DefaultValue="SOCAR Guest Pass" />
+  <Description DefaultValue="SOCAR Tower üçün Forma 1 qonaq buraxılışı hazırlamaq üçün rəsmi add-in." />
+  <IconUrl DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-64.png" />
+  <HighResolutionIconUrl DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-128.png" />
+  <SupportUrl DefaultValue="https://github.com/afraimmammadov/my-addin" />
+  <AppDomains>
+    <AppDomain>https://afraimmammadov.github.io</AppDomain>
+  </AppDomains>
   <Hosts>
-    <Host Name="Mailbox"/>
+    <Host Name="Mailbox" />
   </Hosts>
-  
   <Requirements>
     <Sets>
-      <Set Name="Mailbox" MinVersion="1.3"/>
+      <Set Name="Mailbox" MinVersion="1.1" />
     </Sets>
   </Requirements>
-  
   <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/taskpane.html"/>
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
     <Form xsi:type="ItemEdit">
       <DesktopSettings>
         <SourceLocation DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/taskpane.html"/>
       </DesktopSettings>
     </Form>
   </FormSettings>
-  
-  <Permissions>ReadWriteItem</Permissions>
-  
+  <Permissions>ReadWriteMailbox</Permissions>
   <Rule xsi:type="RuleCollection" Mode="Or">
-    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit"/>
+    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit" />
+    <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Read" />
   </Rule>
-  
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
-    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
-      <Requirements>
-        <bt:Sets DefaultMinVersion="1.3">
-          <bt:Set Name="Mailbox"/>
-        </bt:Sets>
-      </Requirements>
-      <Hosts>
-        <Host xsi:type="MailHost">
-          <DesktopFormFactor>
-            <ExtensionPoint xsi:type="AppointmentOrganizerCommandSurface">
-              <OfficeTab id="TabDefault">
-                <Group id="guestPassGroup">
-                  <Label resid="groupLabel"/>
-                  <Control xsi:type="Button" id="guestPassBtn">
-                    <Label resid="btnLabel"/>
-                    <Supertip>
-                      <Title resid="btnLabel"/>
-                      <Description resid="btnDesc"/>
-                    </Supertip>
-                    <Icon>
-                      <bt:Image size="16" resid="icon16"/>
-                      <bt:Image size="32" resid="icon32"/>
-                      <bt:Image size="80" resid="icon80"/>
-                    </Icon>
-                    <Action xsi:type="ShowTaskpane">
-                      <SourceLocation resid="taskpaneUrl"/>
-                    </Action>
-                  </Control>
-                </Group>
-              </OfficeTab>
-            </ExtensionPoint>
-          </DesktopFormFactor>
-        </Host>
-      </Hosts>
-      <Resources>
-        <bt:Images>
-          <bt:Image id="icon16" DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-16.png"/>
-          <bt:Image id="icon32" DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-64.png"/>
-          <bt:Image id="icon80" DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/icon-80.png"/>
-        </bt:Images>
-        <bt:Urls>
-          <bt:Url id="taskpaneUrl" DefaultValue="https://afraimmammadov.github.io/my-addin/Add_Ins/taskpane.html"/>
-        </bt:Urls>
-        <bt:ShortStrings>
-          <bt:String id="groupLabel" DefaultValue="Buraxilis"/>
-          <bt:String id="btnLabel" DefaultValue="Buraxilis Formasi"/>
-        </bt:ShortStrings>
-        <bt:LongStrings>
-          <bt:String id="btnDesc" DefaultValue="Forma 1 buraxilis sifarisi hazirlayir"/>
-        </bt:LongStrings>
-      </Resources>
-    </VersionOverrides>
-  </VersionOverrides>
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
 </OfficeApp>
